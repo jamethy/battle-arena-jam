@@ -33,28 +33,29 @@ margin_right = 615.0
 margin_bottom = 455.0
 custom_constants/separation = 25
 
-[node name="Title" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 margin_right = 590.0
-margin_bottom = 57.0
-custom_fonts/normal_font = ExtResource( 2 )
-tab_size = 5
-text = "ARENA"
-fit_content_height = true
+margin_bottom = 56.0
+custom_colors/font_color = Color( 0.388235, 0.780392, 0.301961, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Arena"
+align = 1
+uppercase = true
 
 [node name="StartButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
-margin_top = 82.0
+margin_top = 81.0
 margin_right = 590.0
-margin_bottom = 110.0
-text = "START ARENA"
+margin_bottom = 109.0
+text = "HOST ARENA"
 
 [node name="JoinButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
-margin_top = 135.0
+margin_top = 134.0
 margin_right = 590.0
-margin_bottom = 163.0
+margin_bottom = 162.0
 text = "JOIN ARENA"
 
 [node name="CreditsButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
-margin_top = 188.0
+margin_top = 187.0
 margin_right = 590.0
-margin_bottom = 216.0
+margin_bottom = 215.0
 text = "CREDITS"
