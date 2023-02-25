@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://MainMenu/ThemeMain.tres" type="Theme" id=1]
 [ext_resource path="res://Common/fonts/Space_Font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://MainMenu/MainMenu.gd" type="Script" id=3]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -161, 325 )
 theme = ExtResource( 1 )
+script = ExtResource( 3 )
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchor_left = 0.5
@@ -36,7 +39,7 @@ custom_constants/separation = 25
 [node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 margin_right = 590.0
 margin_bottom = 56.0
-custom_colors/font_color = Color( 0.388235, 0.780392, 0.301961, 1 )
+custom_colors/font_color = Color( 0.984314, 0, 0.266667, 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "Arena"
 align = 1
@@ -59,3 +62,25 @@ margin_top = 187.0
 margin_right = 590.0
 margin_bottom = 215.0
 text = "CREDITS"
+
+[node name="Screens" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="BackButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -240.0
+margin_top = -28.0
+margin_right = 240.0
+text = "BACK"
