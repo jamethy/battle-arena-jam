@@ -1,0 +1,8 @@
+[gd_resource type="DynamicFont" load_steps=2 format=2]
+
+[ext_resource path="res://Font/Space.ttf" type="DynamicFontData" id=1]
+
+[resource]
+size = 64
+outline_color = Color( 0.823529, 0.913725, 0.85098, 1 )
+font_data = ExtResource( 1 )
