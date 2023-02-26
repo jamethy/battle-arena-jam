@@ -109,7 +109,7 @@ remotesync func load_world(resource_name):
 	game.load_world(resource_name)
 	for net_id in players:
 		# on initial load you don't need to do rpc signal
-		Events.emit_signal("player_spawned", {
+		Events.local_emit("player_spawned", {
 			"net_id": net_id,
 			"data": players[net_id],
 		})
