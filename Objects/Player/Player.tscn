@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Objects/Player/simple-man-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Player/Player.gd" type="Script" id=2]
@@ -20,9 +20,31 @@ tracks/0/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ) ]
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprite:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( -1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
 
-[sub_resource type="Animation" id=6]
-resource_name = "idle"
+[sub_resource type="Animation" id=9]
+resource_name = "idle_E"
 loop = true
 step = 0.25
 tracks/0/type = "bezier"
@@ -32,12 +54,47 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "idle_W"
+loop = true
+step = 0.25
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=2]
-resource_name = "running_0deg"
+resource_name = "running_E"
 length = 0.5
 loop = true
 step = 0.25
@@ -61,127 +118,9 @@ tracks/1/keys = {
 "points": PoolRealArray( -1, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("Sprite:scale:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-
-[sub_resource type="Animation" id=7]
-resource_name = "running_270deg"
-length = 0.5
-loop = true
-step = 0.25
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 4, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.25 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Sprite:scale:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("Sprite:scale:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-
-[sub_resource type="Animation" id=8]
-resource_name = "running_315deg"
-length = 0.5
-loop = true
-step = 0.25
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 10, -0.25, 0, 0.25, 0, 11, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.25 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Sprite:scale:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( -1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("Sprite:scale:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "running_45deg"
-length = 0.5
-loop = true
-step = 0.25
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 12, -0.25, 0, 0.25, 0, 13, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.25 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Sprite:scale:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( -1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("Sprite:scale:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
 
 [sub_resource type="Animation" id=4]
-resource_name = "running_90deg"
+resource_name = "running_N"
 length = 0.5
 loop = true
 step = 0.25
@@ -205,16 +144,242 @@ tracks/1/keys = {
 "points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("Sprite:scale:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
+
+[sub_resource type="Animation" id=3]
+resource_name = "running_NE"
+length = 0.5
+loop = true
+step = 0.25
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 12, -0.25, 0, 0.25, 0, 13, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.25 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "running_NW"
+length = 0.5
+loop = true
+step = 0.25
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 12, -0.25, 0, 0.25, 0, 13, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.25 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
+
+[sub_resource type="Animation" id=7]
+resource_name = "running_S"
+length = 0.5
+loop = true
+step = 0.25
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 4, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.25 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "running_SE"
+length = 0.5
+loop = true
+step = 0.25
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 10, -0.25, 0, 0.25, 0, 11, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.25 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "running_SW"
+length = 0.5
+loop = true
+step = 0.25
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 10, -0.25, 0, 0.25, 0, 11, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.25 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "running_W"
+length = 0.5
+loop = true
+step = 0.25
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 8, -0.25, 0, 0.25, 0, 9, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.25 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "idle_W"
+
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "idle_E"
+
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "idle_W"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "idle_E"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=13]
+blend_point_0/node = SubResource( 16 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 17 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 18 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 19 )
+blend_point_3/pos = Vector2( 0, 1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "running_W"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "running_N"
+
+[sub_resource type="AnimationNodeAnimation" id=22]
+animation = "running_S"
+
+[sub_resource type="AnimationNodeAnimation" id=23]
+animation = "running_E"
+
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "running_SW"
+
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "running_SE"
+
+[sub_resource type="AnimationNodeAnimation" id=29]
+animation = "running_NE"
+
+[sub_resource type="AnimationNodeAnimation" id=30]
+animation = "running_NW"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=24]
+blend_point_0/node = SubResource( 20 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 21 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 22 )
+blend_point_2/pos = Vector2( 0, 1 )
+blend_point_3/node = SubResource( 23 )
+blend_point_3/pos = Vector2( 1, 0 )
+blend_point_4/node = SubResource( 27 )
+blend_point_4/pos = Vector2( -0.8, 0.6 )
+blend_point_5/node = SubResource( 28 )
+blend_point_5/pos = Vector2( 0.8, 0.6 )
+blend_point_6/node = SubResource( 29 )
+blend_point_6/pos = Vector2( 0.8, -0.6 )
+blend_point_7/node = SubResource( 30 )
+blend_point_7/pos = Vector2( -0.8, -0.6 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachine" id=14]
+states/Idle/node = SubResource( 13 )
+states/Idle/position = Vector2( 196, 98 )
+states/Run/node = SubResource( 24 )
+states/Run/position = Vector2( 459, 101 )
+transitions = [ "Idle", "Run", SubResource( 25 ), "Run", "Idle", SubResource( 26 ) ]
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=15]
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -232,7 +397,7 @@ vframes = 4
 
 [node name="WeaponHolster" type="Area2D" parent="."]
 position = Vector2( 0, -16 )
-rotation = 35.3752
+rotation = 28.9062
 script = ExtResource( 3 )
 weapon_scene = ExtResource( 4 )
 
@@ -244,15 +409,28 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 current = true
 zoom = Vector2( 0.2, 0.2 )
 smoothing_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 5 )
-anims/idle = SubResource( 6 )
-anims/running_0deg = SubResource( 2 )
-anims/running_270deg = SubResource( 7 )
-anims/running_315deg = SubResource( 8 )
-anims/running_45deg = SubResource( 3 )
-anims/running_90deg = SubResource( 4 )
+anims/idle_E = SubResource( 9 )
+anims/idle_W = SubResource( 6 )
+anims/running_E = SubResource( 2 )
+anims/running_N = SubResource( 4 )
+anims/running_NE = SubResource( 3 )
+anims/running_NW = SubResource( 10 )
+anims/running_S = SubResource( 7 )
+anims/running_SE = SubResource( 8 )
+anims/running_SW = SubResource( 11 )
+anims/running_W = SubResource( 12 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 14 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 15 )
+parameters/Idle/blend_position = Vector2( 0, 0 )
+parameters/Run/blend_position = Vector2( 0, 0 )
