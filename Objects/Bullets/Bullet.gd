@@ -26,3 +26,12 @@ func _move(delta:float) -> void:
 	
 func _destroy() ->void:
 	queue_free()
+
+
+func _on_TestBullet_body_entered(body):
+	if body as Player and not is_queued_for_deletion():
+		Events.emit("player_hit_by_bullet", {
+			"player_id": int(body.name),
+			"damage": damage,
+		})
+		_destroy()

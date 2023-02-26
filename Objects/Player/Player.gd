@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Player
 
 onready var animation_tree = $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
@@ -13,6 +14,12 @@ func _ready():
 	puppetPosition = position
 	puppetVelocity = Vector2.ZERO
 	$Camera2D.current = is_network_master()
+	Events.connect("player_hit_by_bullet", self, "_on_player_hit_by_bullet")
+
+func _on_player_hit_by_bullet(params: Dictionary):
+	if params.player_id != get_tree().get_network_unique_id():
+		return
+	print("player hurt")
 
 # from KinematicBody2D
 func _physics_process(delta: float):

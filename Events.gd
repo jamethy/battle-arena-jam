@@ -5,6 +5,7 @@ extends Node
 # all signals accept an object of arguments since gdscript does not support variadic arguments
 signal player_spawned(dict)
 signal player_fired_bullet(dict)
+signal player_hit_by_bullet(dict)
 
 
 func emit(signal_name: String, args: Dictionary = {}):
