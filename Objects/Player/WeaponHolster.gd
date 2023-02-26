@@ -10,6 +10,7 @@ onready var _set_weapons_spawn_point := $WeaponSpawnPoint
 func _physics_process(_delta: float):
 	# This function makes the node rotate towards the mouse
 	look_at(get_global_mouse_position())
+	
 
 func set_weapon(scene: PackedScene) -> void:
 	weapon_scene = scene
