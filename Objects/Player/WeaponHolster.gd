@@ -26,5 +26,6 @@ func set_weapon(scene: PackedScene) -> void:
 		assert(new_weapon is Weapon, "not a weapon")
 		
 		weapon = new_weapon
+		weapon.set_network_master(get_network_master())
 		_set_weapons_spawn_point.add_child(weapon)
 
