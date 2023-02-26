@@ -116,3 +116,8 @@ remotesync func load_world(resource_name):
 		p.position = game.world.get_node("SpawnPoint").position
 		game.world.add_child(p)
 		p.move_and_slide(10*Vector2(randf(), randf()))
+		p.get_node("Camera2D").current = false
+		players[net_id]["object"] = p
+		
+	# not sure why I have to do this here and can't do it in _ready of player
+	players[get_tree().get_network_unique_id()]["object"].get_node("Camera2D").current = true

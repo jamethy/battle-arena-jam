@@ -12,7 +12,6 @@ puppet var puppetVelocity: Vector2
 func _ready():
 	puppetPosition = position
 	puppetVelocity = Vector2.ZERO
-	$Camera2D.current = is_network_master()
 
 # from KinematicBody2D
 func _physics_process(delta: float):
