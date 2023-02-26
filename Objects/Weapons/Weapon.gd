@@ -14,8 +14,7 @@ export (float, 100.0, 3000.0, 1.0) var bullet_speed := 500.0
 onready var _cooldown_timer := $CoolDownTimer
 
 func _ready() -> void:
-	assert(bullet_scene != null, 'Bullet Scene is not provided for "%s"' % [get_path()])
-	_cooldown_timer.wait_time = 1.0 / fire_rate
+	pass
 
 
 func shoot() -> void:
