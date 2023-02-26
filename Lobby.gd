@@ -17,6 +17,8 @@ var local_player: Dictionary = {
 	"name": "me"
 }
 
+var player_resource = preload("res://Objects/Player/Player.tscn")
+
 func _ready():
 	# signals from SceneTree about networking
 	get_tree().connect("network_peer_disconnected", self,"_on_player_disconnected")
@@ -102,3 +104,15 @@ func set_player_name(name: String):
 	local_player.name = name
 	if get_tree().network_peer:
 		rpc("update_player_field", "name", name)
+
+remotesync func load_world(resource_name):
+	game.load_world(resource_name)
+	for net_id in players:
+		var p = player_resource.instance()
+		p.set_network_master(net_id)
+		p.name = str(net_id)
+		# todo set player name
+		# var data = players[net_id]
+		p.position = game.world.get_node("SpawnPoint").position
+		game.world.add_child(p)
+		p.move_and_slide(10*Vector2(randf(), randf()))

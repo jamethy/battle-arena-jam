@@ -13,6 +13,8 @@ func _ready():
 
 # from KinematicBody2D
 func _physics_process(delta: float):
+	if !is_network_master():
+		return
 	var input_dir = get_action_iso_direction()
 	if input_dir.length_squared() > 0:
 		var velocity: Vector2 = input_dir * MOTION_SPEED

@@ -64,3 +64,5 @@ margin_top = 159.0
 margin_right = 590.0
 margin_bottom = 187.0
 text = "FIGHT"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/LobbyContainer/FightButton" to="." method="_on_FightButton_pressed"]
