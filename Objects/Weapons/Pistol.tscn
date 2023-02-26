@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Objects/Weapons/Weapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Weapons/Pistol.gd" type="Script" id=2]
+
+[node name="Pistol" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+fire_rate = 3.5
+bullet_range = 660.0
+bullet_speed = 1500.0
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( -27, 9 )
