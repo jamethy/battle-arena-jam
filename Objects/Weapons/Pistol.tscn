@@ -5,10 +5,10 @@
 
 [node name="Pistol" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-fire_rate = 3.5
+fire_rate = 7.0
 gun_percision = 25.0
-bullet_range = 840.0
-bullet_speed = 880.0
+bullet_range = 400.0
+bullet_speed = 410.0
 
 [node name="Sprite" parent="." index="0"]
-position = Vector2( -27, 9 )
+scale = Vector2( -1, 1 )

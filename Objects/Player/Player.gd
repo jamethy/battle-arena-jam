@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const MOTION_SPEED = 500 # Pixels/second.
+export var MOTION_SPEED = 250 # Pixels/second.
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

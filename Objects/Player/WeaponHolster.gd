@@ -1,4 +1,5 @@
 extends Area2D
+tool
 
 export var weapon_scene: PackedScene setget set_weapon
 
