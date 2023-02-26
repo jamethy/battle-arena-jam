@@ -15,6 +15,7 @@ func _physics_process(delta: float):
 		var velocity: Vector2 = input_dir * MOTION_SPEED
 		move_and_slide(velocity)
 
+
 	
 static func get_action_iso_direction() -> Vector2:
 	var left := Input.get_action_strength("move_left")

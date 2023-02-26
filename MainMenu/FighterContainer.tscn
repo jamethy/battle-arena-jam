@@ -17,12 +17,12 @@ margin_right = 1920.0
 margin_bottom = 28.0
 
 [node name="FighterName" type="Label" parent="HBoxContainer"]
-margin_right = 72.0
+margin_right = 22.0
 margin_bottom = 28.0
-text = "Jamethy"
+text = "Me"
 
 [node name="Character" type="OptionButton" parent="HBoxContainer"]
-margin_left = 97.0
+margin_left = 47.0
 margin_right = 1920.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
