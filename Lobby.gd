@@ -2,6 +2,7 @@ extends Node
 # This class is used for both server and client
 
 signal players_updated
+signal connected
 
 const PORT = 6001
 
@@ -29,6 +30,7 @@ func connect_to_server(ip: String):
 	var peer = NetworkedMultiplayerENet.new()
 	peer.create_client(ip, PORT)
 	get_tree().set_network_peer(peer)
+	emit_signal("connected")
 
 # callback for "connected_to_server" from after the above method (connect_to_server) is successful
 # It sends the client's data to everyone then load the base scene

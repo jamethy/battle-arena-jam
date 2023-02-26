@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://MainMenu/ThemeMain.tres" type="Theme" id=1]
 [ext_resource path="res://Common/fonts/Space_Font.tres" type="DynamicFont" id=2]
-[ext_resource path="res://MainMenu/FighterContainer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://MainMenu/ArenaLobby.gd" type="Script" id=4]
-[ext_resource path="res://CharacterPopup.tscn" type="PackedScene" id=5]
 
 [node name="ArenaLobby" type="Control"]
 anchor_right = 1.0
@@ -59,20 +57,10 @@ text = "FIGHTERS"
 [node name="Players" type="VBoxContainer" parent="PanelContainer/MarginContainer/LobbyContainer"]
 margin_top = 134.0
 margin_right = 590.0
-margin_bottom = 162.0
-
-[node name="FighterContainer" parent="PanelContainer/MarginContainer/LobbyContainer/Players" instance=ExtResource( 3 )]
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 0.0
-margin_right = 590.0
-margin_bottom = 28.0
+margin_bottom = 134.0
 
 [node name="FightButton" type="Button" parent="PanelContainer/MarginContainer/LobbyContainer"]
-margin_top = 187.0
+margin_top = 159.0
 margin_right = 590.0
-margin_bottom = 215.0
+margin_bottom = 187.0
 text = "FIGHT"
-
-[node name="CharacterPopup" parent="PanelContainer/MarginContainer" instance=ExtResource( 5 )]
