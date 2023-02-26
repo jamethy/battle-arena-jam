@@ -7,6 +7,8 @@ var weapon: Weapon
 onready var _set_weapons_spawn_point := $WeaponSpawnPoint
 
 func _physics_process(_delta: float):
+	if !is_network_master():
+		return
 	# This function makes the node rotate towards the mouse
 	look_at(get_global_mouse_position())
 	

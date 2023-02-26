@@ -9,11 +9,9 @@ func _ready():
 	lobby.connect("players_updated",self,"update_players")
 
 func update_players(players):
-	print("updating players")
 	delete_children(players_list)
 	for net_id in players:
 		var p = players[net_id]
-		print("   updating player ", p.name)
 		var item = fighter_scene.instance()
 		players_list.add_child(item)
 		item.init(p.name)
@@ -22,3 +20,6 @@ static func delete_children(node):
 	for n in node.get_children():
 		node.remove_child(n)
 		n.queue_free()
+
+func _on_FightButton_pressed():
+	lobby.rpc("load_world", "Arena2")

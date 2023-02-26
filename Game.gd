@@ -1,5 +1,6 @@
 extends Node
 
+var world = null
 
 func _ready():
 	$Lobby.game = self
@@ -32,3 +33,25 @@ static func get_command_line_args() -> Dictionary:
 			var key_value = argument.split("=")
 			arguments[key_value[0].lstrip("--")] = key_value[1]
 	return arguments
+
+func load_world(new_world_name):
+	print("loading world: " + new_world_name)
+	var new_world = load("res://Scenes/" + new_world_name + ".tscn").instance()
+	if not new_world:
+		print("unable to load new world")
+		return
+	
+	var old_world = world
+
+	if old_world:
+		remove_child(old_world)
+		old_world.queue_free()
+
+	world = new_world
+	if not world:
+		$MainMenu.show()
+		return
+	
+	world.name = 'world'
+	add_child(world)
+	$MainMenu.hide()
