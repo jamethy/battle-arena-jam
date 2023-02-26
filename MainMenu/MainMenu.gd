@@ -3,7 +3,6 @@ extends Control
 
 #preload menu scenes
 const ArenaLobby := preload("ArenaLobby.tscn")
-const JoinLobby := preload("ArenaLobby.tscn")
 const Credits := preload("Credits.tscn")
 
 #Misc Variables
@@ -12,15 +11,21 @@ onready var tween := $Tween
 
 #Button Variables
 onready var back_button := $BackButton
+onready var character_button := $PanelContainer/MarginContainer/VBoxContainer/CharacterButton
 onready var start_button := $PanelContainer/MarginContainer/VBoxContainer/StartButton
 onready var join_button := $PanelContainer/MarginContainer/VBoxContainer/JoinButton
 onready var credits_button := $PanelContainer/MarginContainer/VBoxContainer/CreditsButton
+onready var connect_button := $ConnectPopupDialog/VBoxContainer/SubmitButton
+
+onready var lobby = get_node("/root/Game/Lobby")
 
 func _ready () -> void:
 	back_button.connect("pressed", self, "empty_screens")
-	start_button.connect("pressed",self,"change_scene",[ArenaLobby])
-	join_button.connect("pressed",self,"change_scene",[JoinLobby])
+	character_button.connect("pressed", self, "on_character_button")
+	start_button.connect("pressed",self,"on_start_lobby")
+	join_button.connect("pressed",self,"on_join_button")
 	credits_button.connect("pressed",self,"change_scene",[Credits])
+	connect_button.connect("pressed",self,"on_connect_popup_submit")
 
 func change_scene(scene: PackedScene) -> void:
 	var screen := scene.instance()
@@ -45,3 +50,24 @@ func empty_screens() -> void:
 
 func quit_scene() -> void:
 	get_tree().quit()
+
+func on_character_button():
+	$CharacterPopup.popup()
+	
+func on_join_button():
+	$ConnectPopupDialog.popup()
+
+func on_connect_popup_submit():
+	$ConnectPopupDialog/VBoxContainer/SubmitButton.disabled = true
+	lobby.connect_to_server($ConnectPopupDialog/VBoxContainer/IPAddress.text)
+	lobby.connect("connected", self,"on_lobby_connected")
+
+func on_lobby_connected():
+	lobby.disconnect("connected", self, "on_lobby_connected")
+	$ConnectPopupDialog.hide()
+	change_scene(ArenaLobby)
+
+func on_start_lobby():
+	lobby.create_server()
+	change_scene(ArenaLobby)
+	
