@@ -5,26 +5,35 @@ onready var animation_state = animation_tree.get("parameters/playback")
 
 export var MOTION_SPEED = 250 # Pixels/second.
 
+puppet var puppetPosition: Vector2
+puppet var puppetVelocity: Vector2
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
+	puppetPosition = position
+	puppetVelocity = Vector2.ZERO
+	$Camera2D.current = is_network_master()
 
 # from KinematicBody2D
 func _physics_process(delta: float):
-	if !is_network_master():
-		return
-	var input_dir = get_action_iso_direction()
-	if input_dir.length_squared() > 0:
-		var velocity: Vector2 = input_dir * MOTION_SPEED
+	var velocity: Vector2
+	if is_network_master():
+		velocity = get_action_iso_direction() * MOTION_SPEED
+		rset_unreliable("puppetPosition", position)
+		rset_unreliable("puppetVelocity", velocity)
+	else:
+		velocity = puppetVelocity
+		position = puppetPosition
+	
+	if velocity.length_squared() > 0:
 		move_and_slide(velocity)
 		animation_state.travel("Run")
 	else :
 		animation_state.travel("Idle")
 	
-	animation_tree.set ('parameters/Idle/blend_position', input_dir.normalized())
-	animation_tree.set ('parameters/Run/blend_position', input_dir.normalized())
+	var nVel = velocity.normalized()
+	animation_tree.set ('parameters/Idle/blend_position', nVel)
+	animation_tree.set ('parameters/Run/blend_position', nVel)
 	
 
 	
