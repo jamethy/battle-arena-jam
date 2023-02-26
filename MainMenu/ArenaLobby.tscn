@@ -1,13 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://MainMenu/ThemeMain.tres" type="Theme" id=1]
 [ext_resource path="res://Common/fonts/Space_Font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://MainMenu/FighterContainer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MainMenu/ArenaLobby.gd" type="Script" id=4]
+[ext_resource path="res://CharacterPopup.tscn" type="PackedScene" id=5]
 
 [node name="ArenaLobby" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -7.0
+margin_top = -12.0
+margin_right = -7.0
+margin_bottom = -12.0
 theme = ExtResource( 1 )
+script = ExtResource( 4 )
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchor_left = 0.5
@@ -27,34 +34,34 @@ custom_constants/margin_top = 25
 custom_constants/margin_left = 25
 custom_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="LobbyContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 margin_left = 25.0
 margin_top = 25.0
 margin_right = 615.0
 margin_bottom = 455.0
 custom_constants/separation = 25
 
-[node name="Title" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/LobbyContainer"]
 margin_right = 590.0
-margin_bottom = 57.0
-custom_fonts/normal_font = ExtResource( 2 )
-tab_size = 5
+margin_bottom = 56.0
+custom_colors/font_color = Color( 0.388235, 0.780392, 0.301961, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "ARENA LOBBY"
-fit_content_height = true
+align = 1
 
-[node name="Fighters" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
-margin_top = 82.0
+[node name="Fighters" type="Label" parent="PanelContainer/MarginContainer/LobbyContainer"]
+margin_top = 81.0
 margin_right = 590.0
-margin_bottom = 110.0
+margin_bottom = 109.0
 custom_colors/font_color = Color( 0.388235, 0.780392, 0.301961, 1 )
 text = "FIGHTERS"
 
-[node name="Players" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
-margin_top = 135.0
+[node name="Players" type="VBoxContainer" parent="PanelContainer/MarginContainer/LobbyContainer"]
+margin_top = 134.0
 margin_right = 590.0
-margin_bottom = 163.0
+margin_bottom = 162.0
 
-[node name="FighterContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Players" instance=ExtResource( 3 )]
+[node name="FighterContainer" parent="PanelContainer/MarginContainer/LobbyContainer/Players" instance=ExtResource( 3 )]
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -62,14 +69,10 @@ margin_top = 0.0
 margin_right = 590.0
 margin_bottom = 28.0
 
-[node name="FightButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
-margin_top = 188.0
+[node name="FightButton" type="Button" parent="PanelContainer/MarginContainer/LobbyContainer"]
+margin_top = 187.0
 margin_right = 590.0
-margin_bottom = 216.0
+margin_bottom = 215.0
 text = "FIGHT"
 
-[node name="BackButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
-margin_top = 241.0
-margin_right = 590.0
-margin_bottom = 269.0
-text = "BACK"
+[node name="CharacterPopup" parent="PanelContainer/MarginContainer" instance=ExtResource( 5 )]

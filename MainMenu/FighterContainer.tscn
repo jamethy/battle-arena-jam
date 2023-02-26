@@ -1,19 +1,33 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
 
-[node name="FighterContainer" type="HBoxContainer"]
+[ext_resource path="res://MainMenu/ThemeMain.tres" type="Theme" id=1]
+[ext_resource path="res://MainMenu/FighterContainer.gd" type="Script" id=2]
+
+[node name="FighterContainer" type="PanelContainer"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 margin_top = -7.0
 margin_bottom = 7.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
 
-[node name="FighterName" type="Label" parent="."]
-margin_right = 51.0
-margin_bottom = 14.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 1920.0
+margin_bottom = 28.0
+
+[node name="FighterName" type="Label" parent="HBoxContainer"]
+margin_right = 72.0
+margin_bottom = 28.0
 text = "Jamethy"
 
-[node name="FighterCharacter" type="Label" parent="."]
-margin_left = 55.0
-margin_right = 89.0
+[node name="Character" type="OptionButton" parent="HBoxContainer"]
+margin_left = 97.0
+margin_right = 1920.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Character"]
+margin_right = 40.0
 margin_bottom = 14.0
-text = "Bot 1"
+text = "SimpleMan"
