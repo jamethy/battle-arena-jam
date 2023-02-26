@@ -15,6 +15,7 @@ onready var character_button := $PanelContainer/MarginContainer/VBoxContainer/Ch
 onready var start_button := $PanelContainer/MarginContainer/VBoxContainer/StartButton
 onready var join_button := $PanelContainer/MarginContainer/VBoxContainer/JoinButton
 onready var credits_button := $PanelContainer/MarginContainer/VBoxContainer/CreditsButton
+onready var connect_button := $ConnectPopupDialog/VBoxContainer/SubmitButton
 
 onready var lobby = get_node("/root/Game/Lobby")
 
@@ -24,6 +25,7 @@ func _ready () -> void:
 	start_button.connect("pressed",self,"on_start_lobby")
 	join_button.connect("pressed",self,"on_join_button")
 	credits_button.connect("pressed",self,"change_scene",[Credits])
+	connect_button.connect("pressed",self,"on_connect_popup_submit")
 
 func change_scene(scene: PackedScene) -> void:
 	var screen := scene.instance()
@@ -54,15 +56,15 @@ func on_character_button():
 	
 func on_join_button():
 	$ConnectPopupDialog.popup()
-	change_scene(ArenaLobby)
 
 func on_connect_popup_submit():
 	$ConnectPopupDialog/VBoxContainer/SubmitButton.disabled = true
-	lobby.connect_to_server($ConnectPopupDialog.IPAddress.text)
+	lobby.connect_to_server($ConnectPopupDialog/VBoxContainer/IPAddress.text)
 	lobby.connect("connected", self,"on_lobby_connected")
 
 func on_lobby_connected():
 	lobby.disconnect("connected", self, "on_lobby_connected")
+	$ConnectPopupDialog.hide()
 	change_scene(ArenaLobby)
 
 func on_start_lobby():

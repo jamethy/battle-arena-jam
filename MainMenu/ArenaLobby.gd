@@ -5,6 +5,10 @@ onready var players_list = $PanelContainer/MarginContainer/LobbyContainer/Player
 var fighter_scene = preload("res://MainMenu/FighterContainer.tscn")
 
 func _ready():
+	update_players()
+	lobby.connect("players_updated",self,"update_players")
+
+func update_players():
 	for net_id in lobby.players:
 		var p = lobby.players[net_id]
 		var item = fighter_scene.instance()

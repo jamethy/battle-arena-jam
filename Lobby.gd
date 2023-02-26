@@ -27,14 +27,15 @@ func _ready():
 # This method just connects to the server
 # It signals network_peer_connected to server and all clients (handled in _player_connected)
 func connect_to_server(ip: String):
+	print("connecting to " + ip)
 	var peer = NetworkedMultiplayerENet.new()
 	peer.create_client(ip, PORT)
 	get_tree().set_network_peer(peer)
-	emit_signal("connected")
 
 # callback for "connected_to_server" from after the above method (connect_to_server) is successful
 # It sends the client's data to everyone then load the base scene
 func _on_connected_ok():
+	print("connected")
 	var net_id = get_tree().get_network_unique_id()
 	local_player["network_id"] = net_id
 
@@ -43,6 +44,7 @@ func _on_connected_ok():
 
 	# request to the server to send me people in lobby
 	rpc_id(1, "populate_lobby")
+	emit_signal("connected")
 
 
 func _on_connected_fail():
@@ -61,7 +63,6 @@ func create_server():
 # callback for "server_disconnected"
 func _on_server_disconnected():
 	local_player.erase("network_id")
-	game.show_main_menu()
 
 # Called remotely by a specific client
 # only executed by the server
@@ -99,4 +100,5 @@ remotesync func update_player_field(field, value):
 
 func set_player_name(name: String):
 	local_player.name = name
-	rpc("update_player_field", "name", name)
+	if get_tree().network_peer:
+		rpc("update_player_field", "name", name)
