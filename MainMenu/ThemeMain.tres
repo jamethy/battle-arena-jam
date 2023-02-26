@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=2]
+[gd_resource type="Theme" load_steps=10 format=2]
 
 [ext_resource path="res://Common/fonts/Space.ttf" type="DynamicFontData" id=1]
 
@@ -30,6 +30,9 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.14902, 0.168627, 0.266667, 1 )
 corner_radius_top_left = 16
@@ -56,6 +59,11 @@ Button/styles/hover = SubResource( 1 )
 Button/styles/normal = SubResource( 2 )
 Button/styles/pressed = SubResource( 6 )
 HBoxContainer/constants/separation = 25
+LineEdit/styles/normal = SubResource( 8 )
+MarginContainer/constants/margin_bottom = 24
+MarginContainer/constants/margin_left = 24
+MarginContainer/constants/margin_right = 24
+MarginContainer/constants/margin_top = 24
 OptionButton/constants/arrow_margin = 8
 PanelContainer/styles/panel = SubResource( 3 )
 PopupMenu/styles/panel = SubResource( 7 )
