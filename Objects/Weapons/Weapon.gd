@@ -18,10 +18,9 @@ func _ready() -> void:
 	_cooldown_timer.wait_time = 1.0 / fire_rate
 
 func _physics_process(delta):
-	var mouse_pos = get_local_mouse_position()
-	var mouse_pos_normal = mouse_pos.normalized()
-	animation_tree.set ('parameters/Idle/blend_position', mouse_pos_normal)
-	animation_tree.set ('parameters/Shoot/blend_position', mouse_pos_normal)
+	var mouse_pos = get_global_mouse_position().normalized()
+	animation_tree.set ('parameters/Idle/blend_position', mouse_pos)
+	animation_tree.set ('parameters/Shoot/blend_position', mouse_pos)
 
 func shoot() -> void:
 	animation_state.travel("Shoot")

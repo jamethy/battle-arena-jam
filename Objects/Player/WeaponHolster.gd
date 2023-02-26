@@ -14,7 +14,7 @@ func _ready():
 func _physics_process(_delta: float):
 	if is_network_master():
 		# This function makes the node rotate towards the mouse
-		var mouse_pos = get_global_mouse_position()
+		var mouse_pos = get_global_mouse_position().normalized()
 		look_at(mouse_pos)
 		rset_unreliable("puppetTransform", transform)
 	else:
