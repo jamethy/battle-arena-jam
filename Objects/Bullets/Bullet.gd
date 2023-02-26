@@ -6,7 +6,7 @@ export var speed := 750.0
 export var damage := 1
 export var max_range := 1000.0
 
-var _travelled_distance := 0
+var _travelled_distance: float = 0
 
 func _physics_process(delta: float) -> void:
 	_move(delta)
