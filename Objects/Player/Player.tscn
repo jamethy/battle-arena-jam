@@ -397,12 +397,14 @@ vframes = 4
 
 [node name="WeaponHolster" type="Area2D" parent="."]
 position = Vector2( 0, -16 )
-rotation = 28.9062
 script = ExtResource( 3 )
 weapon_scene = ExtResource( 4 )
 
 [node name="WeaponSpawnPoint" type="Position2D" parent="WeaponHolster"]
-position = Vector2( 16, 0 )
+position = Vector2( 12, 0 )
+__meta__ = {
+"_gizmo_extents_": 3.0
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponHolster"]
 visible = false

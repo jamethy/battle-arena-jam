@@ -1,9 +1,105 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Objects/Weapons/simple-gun1.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Weapons/Weapon.gd" type="Script" id=2]
 
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "Idle_S"
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "Idle_N"
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "Idle_W"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "Idle_E"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Idle_SE"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "Idle_SW"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Idle_NW"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "Idle_NE"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=11]
+blend_point_0/node = SubResource( 3 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 4 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 5 )
+blend_point_2/pos = Vector2( -1, 0 )
+blend_point_3/node = SubResource( 6 )
+blend_point_3/pos = Vector2( 1, 0 )
+blend_point_4/node = SubResource( 7 )
+blend_point_4/pos = Vector2( 0.8, 0.6 )
+blend_point_5/node = SubResource( 8 )
+blend_point_5/pos = Vector2( -0.8, 0.6 )
+blend_point_6/node = SubResource( 9 )
+blend_point_6/pos = Vector2( -0.8, -0.6 )
+blend_point_7/node = SubResource( 10 )
+blend_point_7/pos = Vector2( 0.8, -0.6 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "Shoot_S"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "Shoot_N"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "Shoot_W"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "Shoot_E"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "Shoot_NE"
+
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "Shoot_SE"
+
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "Shoot_NW"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "Shoot_SW"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=20]
+blend_point_0/node = SubResource( 12 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 13 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 14 )
+blend_point_2/pos = Vector2( -1, 0 )
+blend_point_3/node = SubResource( 15 )
+blend_point_3/pos = Vector2( 1, 0 )
+blend_point_4/node = SubResource( 16 )
+blend_point_4/pos = Vector2( 0.8, -0.6 )
+blend_point_5/node = SubResource( 17 )
+blend_point_5/pos = Vector2( 0.8, 0.6 )
+blend_point_6/node = SubResource( 18 )
+blend_point_6/pos = Vector2( -0.8, -0.6 )
+blend_point_7/node = SubResource( 19 )
+blend_point_7/pos = Vector2( -0.8, 0.6 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
 [sub_resource type="AnimationNodeStateMachine" id=1]
+states/Idle/node = SubResource( 11 )
+states/Idle/position = Vector2( 430.333, 123.667 )
+states/Shoot/node = SubResource( 20 )
+states/Shoot/position = Vector2( 662.333, 122.111 )
+transitions = [ "Idle", "Shoot", SubResource( 21 ), "Shoot", "Idle", SubResource( 22 ) ]
+start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=2]
 
@@ -21,4 +117,7 @@ one_shot = true
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 1 )
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/playback = SubResource( 2 )
+parameters/Idle/blend_position = Vector2( 0, 0 )
+parameters/Shoot/blend_position = Vector2( 0, 0 )
