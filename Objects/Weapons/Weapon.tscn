@@ -92,6 +92,8 @@ blend_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
+switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachine" id=1]
 states/Idle/node = SubResource( 11 )

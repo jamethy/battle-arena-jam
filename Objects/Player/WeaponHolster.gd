@@ -7,13 +7,15 @@ puppet var puppetTransform: Transform2D
 
 onready var _set_weapons_spawn_point := $WeaponSpawnPoint
 
+
 func _ready():
 	puppetTransform = transform
 
 func _physics_process(_delta: float):
 	if is_network_master():
 		# This function makes the node rotate towards the mouse
-		look_at(get_global_mouse_position())
+		var mouse_pos = get_global_mouse_position()
+		look_at(mouse_pos)
 		rset_unreliable("puppetTransform", transform)
 	else:
 		transform = puppetTransform
