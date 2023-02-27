@@ -104,6 +104,7 @@ func set_player_name(name: String):
 	local_player.name = name
 	if get_tree().network_peer:
 		rpc("update_player_field", "name", name)
+	get_parent().save_settings()
 
 remotesync func load_world(resource_name):
 	game.load_world(resource_name)
