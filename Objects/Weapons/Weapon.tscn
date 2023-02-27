@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://Objects/Weapons/simple-gun1.png" type="Texture" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Weapons/Weapon.gd" type="Script" id=2]
 
 [sub_resource type="AnimationNodeAnimation" id=3]

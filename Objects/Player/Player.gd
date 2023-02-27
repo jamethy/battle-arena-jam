@@ -39,6 +39,7 @@ func _physics_process(delta: float):
 	else :
 		animation_state.travel("Idle")
 	
+	#Set animation 2dblend space based on normalied velocity
 	var nVel = velocity.normalized()
 	animation_tree.set ('parameters/Idle/blend_position', nVel)
 	animation_tree.set ('parameters/Run/blend_position', nVel)

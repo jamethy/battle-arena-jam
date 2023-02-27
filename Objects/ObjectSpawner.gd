@@ -26,6 +26,7 @@ func _on_player_fired_bullet(params: Dictionary):
 	bullet.max_range = params.max_range
 	bullet.speed = params.speed
 	bullet.rotation_percision(deg2rad(params.precision))
+	#bullet.bullet_count = params.count
 	bullet.owner_id = params.player_id
 	world().add_child(bullet)
 

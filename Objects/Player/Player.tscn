@@ -1,12 +1,29 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Objects/Player/simple-man-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Objects/Player/WeaponHolster.gd" type="Script" id=3]
-[ext_resource path="res://Objects/Weapons/Pistol.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Objects/Weapons/Shotgun.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 8.0
+
+[sub_resource type="Shader" id=31]
+code = "shader_type canvas_item;
+
+uniform vec4 select_colour : hint_color;
+uniform vec4 new_colour : hint_color;
+
+void fragment(){
+    COLOR = texture(TEXTURE, UV);
+    if(distance(COLOR, select_colour) < 0.1)
+        COLOR = new_colour;
+}"
+
+[sub_resource type="ShaderMaterial" id=32]
+shader = SubResource( 31 )
+shader_param/select_colour = Color( 0.917647, 0.831373, 0.666667, 1 )
+shader_param/new_colour = Color( 0.968627, 0.462745, 0.133333, 1 )
 
 [sub_resource type="Animation" id=5]
 length = 0.001
@@ -105,7 +122,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 8, -0.25, 0, 0.25, 0, 9, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 12, -0.25, 0, 0.25, 0, 13, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.25 )
 }
 tracks/1/type = "bezier"
@@ -131,7 +148,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 6, -0.25, 0, 0.25, 0, 7, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 8, -0.25, 0, 0.25, 0, 9, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.25 )
 }
 tracks/1/type = "bezier"
@@ -157,7 +174,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 12, -0.25, 0, 0.25, 0, 13, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 20, -0.25, 0, 0.25, 0, 21, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.25 )
 }
 tracks/1/type = "bezier"
@@ -183,7 +200,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 12, -0.25, 0, 0.25, 0, 13, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 20, -0.25, 0, 0.25, 0, 21, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.25 )
 }
 tracks/1/type = "bezier"
@@ -235,7 +252,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 10, -0.25, 0, 0.25, 0, 11, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 16, -0.25, 0, 0.25, 0, 17, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.25 )
 }
 tracks/1/type = "bezier"
@@ -261,7 +278,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 10, -0.25, 0, 0.25, 0, 11, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 16, -0.25, 0, 0.25, 0, 17, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.25 )
 }
 tracks/1/type = "bezier"
@@ -287,7 +304,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 8, -0.25, 0, 0.25, 0, 9, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 12, -0.25, 0, 0.25, 0, 13, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.25 )
 }
 tracks/1/type = "bezier"
@@ -389,11 +406,12 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 32 )
 position = Vector2( 0, -16 )
 scale = Vector2( -1, 1 )
 texture = ExtResource( 1 )
 hframes = 4
-vframes = 4
+vframes = 6
 
 [node name="WeaponHolster" type="Area2D" parent="."]
 position = Vector2( 0, -16 )

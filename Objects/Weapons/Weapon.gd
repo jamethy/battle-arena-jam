@@ -11,16 +11,17 @@ export (float, 0.25, 10, 0.25) var fire_rate := 2.0
 export (float, 0.0, 360.0, 1.0) var gun_percision := 10.0
 export (float, 100.0, 2000.0, 10.0) var bullet_range := 1000.0
 export (float, 100.0, 3000.0, 10.0) var bullet_speed := 500.0
+export (float, 1.0, 5.0, 1.0) var bullet_count := 1.0
 
 onready var _cooldown_timer := $CoolDownTimer
 
 func _ready() -> void:
 	_cooldown_timer.wait_time = 1.0 / fire_rate
 
-func _physics_process(delta):
-	var mouse_pos = get_global_mouse_position().normalized()
-	animation_tree.set ('parameters/Idle/blend_position', mouse_pos)
-	animation_tree.set ('parameters/Shoot/blend_position', mouse_pos)
+#func _physics_process(delta):
+#	var mouse_pos = get_global_mouse_position().normalized()
+#	animation_tree.set ('parameters/Idle/blend_position', mouse_pos)
+#	animation_tree.set ('parameters/Shoot/blend_position', mouse_pos)
 
 func shoot() -> void:
 	animation_state.travel("Shoot")
@@ -31,6 +32,7 @@ func shoot() -> void:
 		"max_range": bullet_range,
 		"speed": bullet_speed,
 		"precision": gun_percision,
+		"count": bullet_count,
 	})
 
 func idle() -> void:
