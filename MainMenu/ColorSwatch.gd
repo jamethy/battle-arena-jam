@@ -14,4 +14,4 @@ func set_color(value:Color) -> void:
 	
 func _ready() -> void:
 	self.color = color
-
+	self.connect("pressed", get_parent(), "_on_ColorSwatch_pressed", [color])
