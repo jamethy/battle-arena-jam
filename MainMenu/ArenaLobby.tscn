@@ -47,22 +47,39 @@ custom_fonts/font = ExtResource( 2 )
 text = "ARENA LOBBY"
 align = 1
 
-[node name="Fighters" type="Label" parent="PanelContainer/MarginContainer/LobbyContainer"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/LobbyContainer"]
 margin_top = 81.0
 margin_right = 590.0
-margin_bottom = 109.0
+margin_bottom = 89.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/LobbyContainer"]
+margin_top = 114.0
+margin_right = 590.0
+margin_bottom = 142.0
+
+[node name="FightersLabel" type="Label" parent="PanelContainer/MarginContainer/LobbyContainer/HBoxContainer"]
+margin_right = 128.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 128, 0 )
 custom_colors/font_color = Color( 0.388235, 0.780392, 0.301961, 1 )
 text = "FIGHTERS"
 
+[node name="WeaponsLabel" type="Label" parent="PanelContainer/MarginContainer/LobbyContainer/HBoxContainer"]
+margin_left = 153.0
+margin_right = 225.0
+margin_bottom = 28.0
+custom_colors/font_color = Color( 0, 0.584314, 0.913725, 1 )
+text = "WEAPON"
+
 [node name="Players" type="VBoxContainer" parent="PanelContainer/MarginContainer/LobbyContainer"]
-margin_top = 134.0
+margin_top = 167.0
 margin_right = 590.0
-margin_bottom = 134.0
+margin_bottom = 167.0
 
 [node name="FightButton" type="Button" parent="PanelContainer/MarginContainer/LobbyContainer"]
-margin_top = 159.0
+margin_top = 192.0
 margin_right = 590.0
-margin_bottom = 187.0
+margin_bottom = 220.0
 text = "FIGHT"
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/LobbyContainer/FightButton" to="." method="_on_FightButton_pressed"]

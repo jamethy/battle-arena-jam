@@ -14,20 +14,18 @@ script = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_right = 1920.0
-margin_bottom = 28.0
+margin_bottom = 48.0
 
 [node name="FighterName" type="Label" parent="HBoxContainer"]
-margin_right = 22.0
-margin_bottom = 28.0
+margin_right = 128.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 128, 48 )
 text = "Me"
+valign = 1
+uppercase = true
 
-[node name="Character" type="OptionButton" parent="HBoxContainer"]
-margin_left = 47.0
+[node name="Weapon" type="OptionButton" parent="HBoxContainer"]
+margin_left = 153.0
 margin_right = 1920.0
-margin_bottom = 28.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="HBoxContainer/Character"]
-margin_right = 40.0
-margin_bottom = 14.0
-text = "SimpleMan"

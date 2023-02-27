@@ -3,6 +3,10 @@ class_name Player
 
 onready var animation_tree = $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
+onready var sprite = $Sprite
+
+onready var lobby = get_node("/root/Game/Lobby")
+
 
 export var MOTION_SPEED = 250 # Pixels/second.
 
@@ -15,6 +19,13 @@ func _ready():
 	puppetVelocity = Vector2.ZERO
 	$Camera2D.current = is_network_master()
 	Events.connect("player_hit_by_bullet", self, "_on_player_hit_by_bullet")
+	
+	#set character color
+	_set_player_color(lobby.local_player.color)
+	
+
+func _set_player_color (color: Color) -> void:
+	sprite.material.set("shader_param/new_colour",color)
 
 func _on_player_hit_by_bullet(params: Dictionary):
 	if params.player_id != int(name):

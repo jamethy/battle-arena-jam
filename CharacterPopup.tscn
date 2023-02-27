@@ -42,10 +42,6 @@ text = "Player Color"
 uppercase = true
 
 [node name="ColorSelector" parent="VBoxContainer" instance=ExtResource( 3 )]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 159.0
 margin_right = 544.0

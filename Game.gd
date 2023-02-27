@@ -6,7 +6,7 @@ const SETTINGS_FILE_NAME = "user://settings.json"
 
 func _ready():
 	$Lobby.game = self
-	load_settings()
+#	load_settings()
 
 	# connect automatically if arguments given
 	var args = get_command_line_args()
@@ -67,10 +67,10 @@ func save_settings():
 	}))
 	file.close()
 	
-func load_settings():
-	var file = File.new()
-	file.open(SETTINGS_FILE_NAME, File.READ)
-	var data = parse_json(file.get_var(true))
-	if data and "local_player" in data:
-		$Lobby.local_player = data["local_player"]
-	file.close()
+#func load_settings():
+#	var file = File.new()
+#	file.open(SETTINGS_FILE_NAME, File.READ)
+#	var data = parse_json(file.get_var(true))
+#	if data and "local_player" in data:
+#		$Lobby.local_player = data["local_player"]
+#	file.close()

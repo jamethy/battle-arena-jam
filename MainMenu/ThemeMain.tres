@@ -1,8 +1,19 @@
-[gd_resource type="Theme" load_steps=10 format=2]
+[gd_resource type="Theme" load_steps=11 format=2]
 
 [ext_resource path="res://Common/fonts/Space.ttf" type="DynamicFontData" id=1]
 
-[sub_resource type="StyleBoxEmpty" id=5]
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.14902, 0.168627, 0.266667, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0.584314, 0.913725, 1 )
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
@@ -35,6 +46,10 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="StyleBoxLine" id=10]
+color = Color( 0.352941, 0.411765, 0.533333, 1 )
+thickness = 2
+
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
 
@@ -59,13 +74,15 @@ font_data = ExtResource( 1 )
 
 [resource]
 default_font = SubResource( 4 )
-Button/styles/focus = SubResource( 5 )
+Button/styles/focus = SubResource( 9 )
 Button/styles/hover = SubResource( 1 )
 Button/styles/normal = SubResource( 2 )
 Button/styles/pressed = SubResource( 6 )
 GridContainer/constants/hseparation = 8
 GridContainer/constants/vseparation = 8
 HBoxContainer/constants/separation = 25
+HSeparator/constants/separation = 8
+HSeparator/styles/separator = SubResource( 10 )
 LineEdit/styles/normal = SubResource( 8 )
 MarginContainer/constants/margin_bottom = 24
 MarginContainer/constants/margin_left = 24
