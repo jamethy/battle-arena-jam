@@ -1,7 +1,7 @@
 extends WindowDialog
 
 onready var lobby = get_node("/root/Game/Lobby")
-onready var character_name := $VBoxContainer/ColorLabel
+onready var character_name := $VBoxContainer/CharacterName
 onready var character_color := $VBoxContainer/ColorSelector
 
 func _on_SubmitButton_pressed():
