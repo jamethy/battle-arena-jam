@@ -12,5 +12,5 @@ func _ready():
 		swatch.connect("pressed", self, "_on_ColorSwatch_pressed", [color])
 
 
-func _on_ColorSwatch_pressed(color_string: String) -> void:
-	color = Color(color_string)
+func _on_ColorSwatch_pressed(c: Color) -> void:
+	color = c
