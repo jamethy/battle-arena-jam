@@ -3,6 +3,7 @@ extends Node2D
 
 onready var animation_tree = $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
+onready var player = get_node("../../../")
 
 
 #weapon Stats
@@ -17,11 +18,12 @@ onready var _cooldown_timer := $CoolDownTimer
 
 func _ready() -> void:
 	_cooldown_timer.wait_time = 1.0 / fire_rate
-
-#func _physics_process(delta):
-#	var mouse_pos = get_global_mouse_position().normalized()
-#	animation_tree.set ('parameters/Idle/blend_position', mouse_pos)
-#	animation_tree.set ('parameters/Shoot/blend_position', mouse_pos)
+	
+func _process(_delta):
+	var mouse_pos = player.get_local_mouse_position().normalized()
+	animation_tree.set ('parameters/Idle/blend_position', mouse_pos)
+	animation_tree.set ('parameters/Shoot/blend_position', mouse_pos)
+	#print(mouse_pos)
 
 func shoot() -> void:
 	animation_state.travel("Shoot")
