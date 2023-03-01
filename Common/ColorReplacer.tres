@@ -1,3 +1,8 @@
-[gd_resource type="ShaderMaterial" format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://Common/Shader_ColorReplacer.gdshader" type="Shader" id=1]
 
 [resource]
+shader = ExtResource( 1 )
+shader_param/select_colour = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+shader_param/new_colour = Color( 0.968627, 0.462745, 0.133333, 1 )

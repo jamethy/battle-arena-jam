@@ -1,14 +1,9 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Objects/Weapons/Weapon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Objects/Weapons/Shotgun.gd" type="Script" id=2]
 [ext_resource path="res://Objects/Weapons/simple-gun-Sheet.png" type="Texture" id=3]
-[ext_resource path="res://Common/Shader_ColorReplacer.gdshader" type="Shader" id=4]
-
-[sub_resource type="ShaderMaterial" id=20]
-shader = ExtResource( 4 )
-shader_param/select_colour = null
-shader_param/new_colour = null
+[ext_resource path="res://Common/ColorReplacer.tres" type="Material" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle_E"
@@ -612,7 +607,7 @@ bullet_speed = 300.0
 bullet_count = 5.0
 
 [node name="Sprite" parent="." index="0"]
-material = SubResource( 20 )
+material = ExtResource( 4 )
 texture = ExtResource( 3 )
 hframes = 2
 vframes = 8
