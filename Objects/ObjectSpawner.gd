@@ -21,14 +21,15 @@ func _on_player_spawned(params: Dictionary):
 	p.move_and_slide(10*Vector2(randf(), randf()))
 
 func _on_player_fired_bullet(params: Dictionary):
-	var bullet: Bullet = bullet_scene.instance()
-	bullet.global_transform = params.transform
-	bullet.max_range = params.max_range
-	bullet.speed = params.speed
-	bullet.rotation_percision(deg2rad(params.precision))
-	#bullet.bullet_count = params.count
-	bullet.owner_id = params.player_id
-	world().add_child(bullet)
+	var bullet_count = params.count
+	for index in bullet_count:
+		var bullet: Bullet = bullet_scene.instance()
+		bullet.global_transform = params.transform
+		bullet.max_range = params.max_range
+		bullet.speed = params.speed
+		bullet.rotation_percision(deg2rad(params.precision))
+		bullet.owner_id = params.player_id
+		world().add_child(bullet)
 
 # todo figure out better way
 func world():

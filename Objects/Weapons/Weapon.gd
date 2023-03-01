@@ -19,11 +19,11 @@ onready var _cooldown_timer := $CoolDownTimer
 func _ready() -> void:
 	_cooldown_timer.wait_time = 1.0 / fire_rate
 	
-func _process(_delta):
-	var mouse_pos = player.get_local_mouse_position().normalized()
-	animation_tree.set ('parameters/Idle/blend_position', mouse_pos)
-	animation_tree.set ('parameters/Shoot/blend_position', mouse_pos)
-	#print(mouse_pos)
+#func _process(_delta):
+#	var mouse_pos = player.get_local_mouse_position().normalized()
+#	animation_tree.set ('parameters/Idle/blend_position', mouse_pos)
+#	animation_tree.set ('parameters/Shoot/blend_position', mouse_pos)
+#	#print(mouse_pos)
 
 func shoot() -> void:
 	animation_state.travel("Shoot")
