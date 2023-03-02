@@ -2,7 +2,7 @@ extends Node
 
 var world = null
 
-const SETTINGS_FILE_NAME = "user://settings.json"
+var settings_file_name = "settings.json"
 
 func _ready():
 	$Lobby.game = self
@@ -18,6 +18,8 @@ func _ready():
 	elif args.has("host"):
 		$Lobby.create_server()
 		$MainMenu.hide()
+	if args.has("config"):
+		settings_file_name = args.config
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("menu"):
@@ -68,7 +70,7 @@ func load_world(new_world_name):
 func save_settings():
 	print("Saving settings")
 	var file = File.new()
-	file.open(SETTINGS_FILE_NAME, File.WRITE)
+	file.open("user://" + settings_file_name, File.WRITE)
 	file.store_var(to_json({
 		"local_player": $Lobby.local_player,
 	}))
@@ -77,7 +79,7 @@ func save_settings():
 func load_settings():
 	print("Reading from settings")
 	var file = File.new()
-	file.open(SETTINGS_FILE_NAME, File.READ)
+	file.open("user://" + settings_file_name, File.READ)
 	var file_var = file.get_var(true)
 	if not file_var:
 		file.close()
