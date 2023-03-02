@@ -108,9 +108,9 @@ func set_player_name(name: String):
 	get_parent().save_settings()
 	
 func set_player_color(color: Color):
-	local_player.color = color
+	local_player.color = color.to_html()
 	if get_tree().network_peer:
-		rpc("update_player_field", "color", color)
+		rpc("update_player_field", "color", color.to_html())
 	get_parent().save_settings()
 
 remotesync func load_world(resource_name):
