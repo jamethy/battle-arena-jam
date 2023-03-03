@@ -7,6 +7,7 @@ onready var player = get_node("../../../")
 
 
 #weapon Stats
+export var weapon_name : String = "Weapon Name"
 export (float, 0.25, 10, 0.25) var fire_rate := 2.0
 #random angle in degrees for gun accuacy
 export (float, 0.0, 360.0, 1.0) var gun_percision := 10.0

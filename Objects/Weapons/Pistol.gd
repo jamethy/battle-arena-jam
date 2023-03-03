@@ -1,4 +1,5 @@
 extends Weapon
+class_name Pistol
 
 
 onready var _sprite := $Sprite

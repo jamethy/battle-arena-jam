@@ -1,5 +1,5 @@
 extends Weapon
-class_name Shotgun
+class_name MachineGun
 
 onready var _sprite := $Sprite
 

@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=11 format=2]
+[gd_resource type="Theme" load_steps=13 format=2]
 
 [ext_resource path="res://Common/fonts/Space.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Common/fonts/Space_Font.tres" type="DynamicFont" id=2]
 
 [sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.14902, 0.168627, 0.266667, 1 )
@@ -65,7 +66,28 @@ anti_aliasing = false
 anti_aliasing_size = 0.01
 
 [sub_resource type="StyleBoxFlat" id=7]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
 bg_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.14902, 0.168627, 0.266667, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 0, 0.266667, 1 )
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+expand_margin_top = 24.0
+expand_margin_bottom = 9.0
 
 [sub_resource type="DynamicFont" id=4]
 size = 32
@@ -92,3 +114,7 @@ OptionButton/constants/arrow_margin = 8
 PanelContainer/styles/panel = SubResource( 3 )
 PopupMenu/styles/panel = SubResource( 7 )
 WindowDialog/colors/title_color = Color( 1, 0, 0.266667, 1 )
+WindowDialog/constants/scaleborder_size = 8
+WindowDialog/constants/title_height = 0
+WindowDialog/fonts/title_font = ExtResource( 2 )
+WindowDialog/styles/panel = SubResource( 11 )
