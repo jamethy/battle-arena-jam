@@ -128,3 +128,4 @@ margin_bottom = 28.0
 text = "Connect"
 
 [node name="CharacterPopup" parent="." instance=ExtResource( 4 )]
+visible = false

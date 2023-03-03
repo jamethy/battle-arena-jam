@@ -2,14 +2,14 @@ extends Node
 
 var world = null
 
-const SETTINGS_FILE_NAME = "user://settings.json"
+var settings_file_name = "settings.json"
 
 func _ready():
 	$Lobby.game = self
-#	load_settings()
 
 	# connect automatically if arguments given
 	var args = get_command_line_args()
+	print("args ", args)
 	if args.has("name"):
 		$Lobby.set_player_name(args.name)
 	if args.has("connect"):
@@ -18,6 +18,10 @@ func _ready():
 	elif args.has("host"):
 		$Lobby.create_server()
 		$MainMenu.hide()
+	if args.has("config"):
+		settings_file_name = args.config
+
+	load_settings()
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("menu"):
@@ -59,18 +63,30 @@ func load_world(new_world_name):
 	add_child(world)
 	$MainMenu.hide()
 
+
+# settings storage location:
+# https://docs.godotengine.org/en/stable/tutorials/io/data_paths.html#accessing-persistent-user-data-user
+#  - linux: ~/.local/share/godot/app_userdata/battle-arena-jam/settings.json
+#  - windows: %APPDATA%\Godot\app_userdata\battle-arena-jam\settings.json
+
 func save_settings():
+	print("Saving settings")
 	var file = File.new()
-	file.open(SETTINGS_FILE_NAME, File.WRITE)
+	file.open("user://" + settings_file_name, File.WRITE)
 	file.store_var(to_json({
 		"local_player": $Lobby.local_player,
 	}))
 	file.close()
 	
-#func load_settings():
-#	var file = File.new()
-#	file.open(SETTINGS_FILE_NAME, File.READ)
-#	var data = parse_json(file.get_var(true))
-#	if data and "local_player" in data:
-#		$Lobby.local_player = data["local_player"]
-#	file.close()
+func load_settings():
+	print("Reading from settings")
+	var file = File.new()
+	file.open("user://" + settings_file_name, File.READ)
+	var file_var = file.get_var(true)
+	if not file_var:
+		file.close()
+		return
+	var data = parse_json(file_var)
+	if data and "local_player" in data:
+		$Lobby.local_player = data["local_player"]
+	file.close()
