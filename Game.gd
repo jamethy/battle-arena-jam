@@ -6,10 +6,10 @@ var settings_file_name = "settings.json"
 
 func _ready():
 	$Lobby.game = self
-	load_settings()
 
 	# connect automatically if arguments given
 	var args = get_command_line_args()
+	print("args ", args)
 	if args.has("name"):
 		$Lobby.set_player_name(args.name)
 	if args.has("connect"):
@@ -20,6 +20,8 @@ func _ready():
 		$MainMenu.hide()
 	if args.has("config"):
 		settings_file_name = args.config
+
+	load_settings()
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("menu"):
