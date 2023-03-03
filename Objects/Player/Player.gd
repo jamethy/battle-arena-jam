@@ -20,8 +20,7 @@ func _ready():
 	$Camera2D.current = is_network_master()
 	Events.connect("player_hit_by_bullet", self, "_on_player_hit_by_bullet")
 	
-	#set character color
-	_set_player_color(lobby.local_player.color)
+	_set_player_color(lobby.players[get_network_master()].color)
 	
 
 func _set_player_color (color: Color) -> void:
