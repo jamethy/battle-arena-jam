@@ -15,7 +15,8 @@ var players: Dictionary = {
 
 var local_player: Dictionary = {
 	"name": "me",
-	"color": "e43b44"
+	"color": "e43b44",
+	"weapon": "Pistol",
 }
 
 var player_resource = preload("res://Objects/Player/Player.tscn")
@@ -111,6 +112,12 @@ func set_player_color(color: Color):
 	local_player.color = color.to_html()
 	if get_tree().network_peer:
 		rpc("update_player_field", "color", color.to_html())
+	get_parent().save_settings()
+
+func set_player_weapon(weapon: String):
+	local_player.weapon = weapon
+	if get_tree().network_peer:
+		rpc("update_player_field", "weapon", weapon)
 	get_parent().save_settings()
 
 remotesync func load_world(resource_name):

@@ -6,6 +6,7 @@ var weapon: Weapon
 puppet var puppetTransform: Transform2D
 
 onready var _set_weapons_spawn_point := $WeaponSpawnPoint
+onready var lobby = get_node("/root/Game/Lobby")
 
 
 func _ready():

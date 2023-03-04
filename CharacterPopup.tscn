@@ -62,13 +62,17 @@ text = "Weapon"
 uppercase = true
 
 [node name="WeaponSelector" type="OptionButton" parent="VBoxContainer"]
-margin_right = 14.0
-margin_bottom = 28.0
-
-[node name="SubmitButton" type="Button" parent="VBoxContainer"]
 margin_top = 373.0
 margin_right = 540.0
 margin_bottom = 401.0
+text = "Item 0"
+items = [ "Item 0", null, false, 0, null ]
+selected = 0
+
+[node name="SubmitButton" type="Button" parent="VBoxContainer"]
+margin_top = 426.0
+margin_right = 540.0
+margin_bottom = 454.0
 text = "Submit"
 
 [connection signal="about_to_show" from="." to="." method="_on_CharacterPopup_about_to_show"]
