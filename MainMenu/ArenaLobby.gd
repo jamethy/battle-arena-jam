@@ -14,7 +14,7 @@ func update_players(players):
 		var p = players[net_id]
 		var item = fighter_scene.instance()
 		players_list.add_child(item)
-		item.init(p.name)
+		item.init(p.name,p.color)
 
 static func delete_children(node):
 	for n in node.get_children():

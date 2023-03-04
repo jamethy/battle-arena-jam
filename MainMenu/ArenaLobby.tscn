@@ -57,19 +57,18 @@ margin_top = 114.0
 margin_right = 590.0
 margin_bottom = 142.0
 
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelContainer/MarginContainer/LobbyContainer/HBoxContainer"]
+margin_right = 48.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 48, 0 )
+
 [node name="FightersLabel" type="Label" parent="PanelContainer/MarginContainer/LobbyContainer/HBoxContainer"]
-margin_right = 128.0
+margin_left = 73.0
+margin_right = 201.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 128, 0 )
 custom_colors/font_color = Color( 0.388235, 0.780392, 0.301961, 1 )
 text = "FIGHTERS"
-
-[node name="WeaponsLabel" type="Label" parent="PanelContainer/MarginContainer/LobbyContainer/HBoxContainer"]
-margin_left = 153.0
-margin_right = 225.0
-margin_bottom = 28.0
-custom_colors/font_color = Color( 0, 0.584314, 0.913725, 1 )
-text = "WEAPON"
 
 [node name="Players" type="VBoxContainer" parent="PanelContainer/MarginContainer/LobbyContainer"]
 margin_top = 167.0

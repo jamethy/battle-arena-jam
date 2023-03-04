@@ -7,8 +7,8 @@
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_top = -7.0
-margin_bottom = 7.0
+margin_top = -24.0
+margin_bottom = 24.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
@@ -16,16 +16,25 @@ script = ExtResource( 2 )
 margin_right = 1920.0
 margin_bottom = 48.0
 
+[node name="FighterColor" type="ColorRect" parent="HBoxContainer"]
+margin_right = 48.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+
 [node name="FighterName" type="Label" parent="HBoxContainer"]
-margin_right = 128.0
+margin_left = 73.0
+margin_right = 201.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 128, 48 )
 text = "Me"
 valign = 1
 uppercase = true
 
-[node name="Weapon" type="OptionButton" parent="HBoxContainer"]
-margin_left = 153.0
-margin_right = 1920.0
+[node name="FighterWeapon" type="Label" parent="HBoxContainer"]
+margin_left = 226.0
+margin_right = 354.0
 margin_bottom = 48.0
-size_flags_horizontal = 3
+rect_min_size = Vector2( 128, 48 )
+text = "Pistol"
+valign = 1
+uppercase = true
