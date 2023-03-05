@@ -88,5 +88,7 @@ func load_settings():
 		return
 	var data = parse_json(file_var)
 	if data and "local_player" in data:
-		$Lobby.local_player = data["local_player"]
+		var player_data = data["local_player"]
+		for key in player_data:
+			$Lobby.local_player[key] = player_data[key]
 	file.close()
