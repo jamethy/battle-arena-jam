@@ -1,16 +1,24 @@
 extends Area2D
+class_name WeaponHolder
+
+onready var _set_weapons_spawn_point := $WeaponSpawnPoint
+onready var lobby = get_node("/root/Game/Lobby")
 
 export var weapon_scene: PackedScene setget set_weapon
 
 var weapon: Weapon
 puppet var puppetTransform: Transform2D
 
-onready var _set_weapons_spawn_point := $WeaponSpawnPoint
-onready var lobby = get_node("/root/Game/Lobby")
+var player_weapons = {
+	"PISTOL":"res://Objects/Weapons/Pistol.tscn",
+	"SHOTGUN":"res://Objects/Weapons/Shotgun.tscn",
+	"MACHING GUN":"res://Objects/Weapons/MachineGun.tscn",
+	}
 
 
 func _ready():
 	puppetTransform = transform
+	
 
 func _physics_process(_delta: float):
 		
@@ -38,4 +46,5 @@ func set_weapon(scene: PackedScene) -> void:
 		weapon = new_weapon
 		weapon.set_network_master(get_network_master())
 		_set_weapons_spawn_point.add_child(weapon)
+
 

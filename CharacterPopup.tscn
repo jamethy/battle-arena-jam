@@ -65,9 +65,6 @@ uppercase = true
 margin_top = 373.0
 margin_right = 540.0
 margin_bottom = 401.0
-text = "Item 0"
-items = [ "Item 0", null, false, 0, null ]
-selected = 0
 
 [node name="SubmitButton" type="Button" parent="VBoxContainer"]
 margin_top = 426.0

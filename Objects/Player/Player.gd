@@ -6,6 +6,8 @@ onready var animation_state = animation_tree.get("parameters/playback")
 onready var sprite = $Sprite
 
 onready var lobby = get_node("/root/Game/Lobby")
+onready var holster = $WeaponHolster
+
 
 
 export var MOTION_SPEED = 250 # Pixels/second.
@@ -21,7 +23,8 @@ func _ready():
 	Events.connect("player_hit_by_bullet", self, "_on_player_hit_by_bullet")
 	
 	_set_player_color(lobby.players[get_network_master()].color)
-	
+#	holster.set_weapon(holster.player_weapons[lobby.players.weapon])
+#	print(holster.weapon)
 
 func _set_player_color (color: Color) -> void:
 	sprite.material.set("shader_param/new_colour",color)

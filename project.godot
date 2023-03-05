@@ -63,6 +63,11 @@ _global_script_classes=[ {
 "class": "Weapon",
 "language": "GDScript",
 "path": "res://Objects/Weapons/Weapon.gd"
+}, {
+"base": "Area2D",
+"class": "WeaponHolder",
+"language": "GDScript",
+"path": "res://Objects/Player/WeaponHolster.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
@@ -75,7 +80,8 @@ _global_script_class_icons={
 "Pistol": "",
 "Player": "",
 "Shotgun": "",
-"Weapon": ""
+"Weapon": "",
+"WeaponHolder": ""
 }
 
 [application]
