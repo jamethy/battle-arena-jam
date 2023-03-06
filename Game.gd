@@ -4,6 +4,7 @@ var world = null
 
 var settings_file_name = "settings.json"
 onready var main_menu = $CanvasLayer/MainMenu
+onready var hud = $CanvasLayer/OnScreenUI
 
 func _ready():
 	$Lobby.game = self
@@ -32,6 +33,7 @@ func _input(event: InputEvent):
 			main_menu.show()
 	else:
 		return
+	# todo
 	get_tree().set_input_as_handled()
 
 static func get_command_line_args() -> Dictionary:
@@ -56,6 +58,8 @@ func load_world(new_world_name):
 		old_world.queue_free()
 
 	world = new_world
+	hud.visible = world != null
+
 	if not world:
 		main_menu.show()
 		return

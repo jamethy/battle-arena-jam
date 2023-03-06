@@ -5,6 +5,10 @@
 
 [node name="Arena2" type="YSort"]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="OnScreenUI" parent="CanvasLayer" instance=ExtResource( 1 )]
+
 [node name="TileMap" type="TileMap" parent="."]
 mode = 1
 tile_set = ExtResource( 2 )
@@ -16,7 +20,3 @@ tile_data = PoolIntArray( -917457, 0, 0, -851939, 0, 8, -851938, 0, 10, -851937,
 
 [node name="SpawnPoint" type="Node2D" parent="."]
 position = Vector2( 470, 319 )
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="OnScreenUI" parent="CanvasLayer" instance=ExtResource( 1 )]

@@ -37,5 +37,10 @@ func _redraw_health_bar() -> void:
 		# When index is higher than health, draw an empty heart.
 		else:
 			heart.texture = health_empty
+
+		# not completely sure why this is necessary
+		# if we do not set it then the clicks don't pass to the game correctly
+		heart.mouse_filter = MOUSE_FILTER_IGNORE
+
 		add_child(heart)
 
