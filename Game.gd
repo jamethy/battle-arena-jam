@@ -3,6 +3,7 @@ extends Node
 var world = null
 
 var settings_file_name = "settings.json"
+onready var main_menu = $CanvasLayer/MainMenu
 
 func _ready():
 	$Lobby.game = self
@@ -14,21 +15,21 @@ func _ready():
 		$Lobby.set_player_name(args.name)
 	if args.has("connect"):
 		$Lobby.connect_to_server(args.connect)
-		$MainMenu.hide()
+		main_menu.hide()
 	elif args.has("host"):
 		$Lobby.create_server()
-		$MainMenu.hide()
+		main_menu.hide()
 	if args.has("config"):
 		settings_file_name = args.config
 
 	load_settings()
 
 func _input(event: InputEvent):
-	if event.is_action_pressed("menu"):
-		if $MainMenu.visible:
-			$MainMenu.hide()
+	if event.is_action_pressed("menu") and world:
+		if main_menu.visible:
+			main_menu.hide()
 		else:
-			$MainMenu.show()
+			main_menu.show()
 	else:
 		return
 	get_tree().set_input_as_handled()
@@ -56,12 +57,12 @@ func load_world(new_world_name):
 
 	world = new_world
 	if not world:
-		$MainMenu.show()
+		main_menu.show()
 		return
 	
 	world.name = 'world'
 	add_child(world)
-	$MainMenu.hide()
+	main_menu.hide()
 
 
 # settings storage location:
@@ -79,7 +80,7 @@ func save_settings():
 	file.close()
 	
 func load_settings():
-	print("Reading from settings")
+	print("Reading from settings " + settings_file_name)
 	var file = File.new()
 	file.open("user://" + settings_file_name, File.READ)
 	var file_var = file.get_var(true)
