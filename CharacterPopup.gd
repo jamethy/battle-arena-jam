@@ -5,11 +5,7 @@ onready var character_name := $VBoxContainer/CharacterName
 onready var character_color := $VBoxContainer/ColorSelector
 onready var character_weapon := $VBoxContainer/WeaponSelector
 
-var player_weapons = {
-	"PISTOL":"res://Objects/Weapons/Pistol.tscn",
-	"SHOTGUN":"res://Objects/Weapons/Shotgun.tscn",
-	"MACHING GUN":"res://Objects/Weapons/MachineGun.tscn",
-	}
+var player_weapons = [ "PISTOL", "SHOTGUN", "MACHING GUN" ]
 
 
 func _ready():
@@ -26,3 +22,8 @@ func _on_SubmitButton_pressed():
 func _on_CharacterPopup_about_to_show():
 	character_name.text = lobby.local_player.name
 	character_color.color = lobby.local_player.color
+
+	for i in range(0, character_weapon.get_item_count()):
+		if character_weapon.get_item_text(i).to_upper() == lobby.local_player.weapon.to_upper():
+			character_weapon.selected = i
+			break
