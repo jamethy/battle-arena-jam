@@ -8,7 +8,8 @@ onready var sprite = $Sprite
 onready var lobby = get_node("/root/Game/Lobby")
 onready var holster = $WeaponHolster
 
-
+export var max_health = 5 
+export var current_health = 5
 
 export var MOTION_SPEED = 250 # Pixels/second.
 
@@ -26,13 +27,26 @@ func _set_player_color (color: Color) -> void:
 	sprite.material.set("shader_param/new_colour",color)
 
 func _on_player_hit_by_bullet(params: Dictionary):
-	if params.player_id != int(name):
+	if params.player_id != get_network_master():
 		# not for this player
 		return
-	print("player hurt")
+	set_health(current_health - params.damage)
+	if current_health == 0:
+		Events.emit("player_died", {
+			"player_id": int(name),
+			"killer_id": params.damage_doer,
+		})
+
+func set_health(new_health: int):
+	current_health = clamp(new_health, 0, max_health)
+	Events.emit("player_health_change", {
+		"player_id": int(name),
+		"value": current_health,
+		"max_value": max_health,
+	})
 
 # from KinematicBody2D
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
 	var velocity: Vector2
 	if is_network_master():
 		velocity = get_action_iso_direction() * MOTION_SPEED
@@ -53,6 +67,9 @@ func _physics_process(delta: float):
 	animation_tree.set ('parameters/Idle/blend_position', nVel)
 	animation_tree.set ('parameters/Run/blend_position', nVel)
 	
+func _process(delta):
+	if !is_network_master() && puppetVelocity.length_squared() > 0:
+		position += delta * puppetVelocity
 
 	
 static func get_action_iso_direction() -> Vector2:

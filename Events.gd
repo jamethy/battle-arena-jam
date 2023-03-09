@@ -1,12 +1,20 @@
 extends Node
 
+# warnings-disable
+
 # Global Events Bus
 
 # all signals accept an object of arguments since gdscript does not support variadic arguments
+# net_id, data
 signal player_spawned(dict)
+# player_id, transform, max_range, speed, precision, count
 signal player_fired_bullet(dict)
+# player_id, damage, damage_doer
 signal player_hit_by_bullet(dict)
-
+# player_id, value, max_value
+signal player_health_change(dict)
+# player_id, killer_id
+signal player_died(dict)
 
 func emit(signal_name: String, args: Dictionary = {}):
 	rpc("_emit_signal", signal_name, args)

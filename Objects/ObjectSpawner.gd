@@ -6,6 +6,7 @@ export var bullet_scene: PackedScene
 func _ready():
 	assert(player_scene != null, 'Player Scene is not provided for "%s"' % [get_path()])
 	Events.connect("player_spawned", self, "_on_player_spawned")
+	Events.connect("player_died", self, "_on_player_died")
 	
 	assert(bullet_scene != null, 'Bullet Scene is not provided for "%s"' % [get_path()])
 	Events.connect("player_fired_bullet", self, "_on_player_fired_bullet")
@@ -27,6 +28,24 @@ func _on_player_spawned(params: Dictionary):
 
 	# move them a random direction to prevent spawning ontop of each other
 	p.move_and_slide(10*Vector2(randf(), randf()))
+
+
+func _on_player_died(params: Dictionary):
+	var p: Node = null
+	for child in world().get_children():
+		if int(child.name) == params.player_id:
+			p = child
+			break
+	if p == null:
+		print("no player found by id: ", params.player_id)
+		return
+	p.position = world().get_node("SpawnPoint").position
+	# move them a random direction to prevent spawning ontop of each other
+	p.move_and_slide(10*Vector2(randf(), randf()))
+	p.puppetPosition = p.position
+	p.puppetVelocity = Vector2()
+	p.set_health(p.max_health)
+
 
 func _on_player_fired_bullet(params: Dictionary):
 	var bullet_count = params.count

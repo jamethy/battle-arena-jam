@@ -5,14 +5,25 @@ extends HBoxContainer
 export var health_full: Texture
 export var health_empty:  Texture
 
+# note these aren't the "source of truth", the real values are on the player
 export var max_health = 5 
-export var current_health = 4
+export var current_health = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_redraw_health_bar()
+	Events.connect("player_health_change", self, "_on_player_health_change")
 
-func set_health(new_health: int) -> void:	# The clamp() function prevents the new_health from going 
+
+func _on_player_health_change(params: Dictionary):
+	if params.player_id != get_tree().get_network_unique_id():
+		# not for this player
+		return
+	max_health = params.max_value
+	set_health(params.value)
+
+func set_health(new_health: int) -> void:	
+	# The clamp() function prevents the new_health from going below zero
 	current_health = clamp(new_health, 0, max_health)
 	_redraw_health_bar()
 

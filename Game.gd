@@ -11,7 +11,6 @@ func _ready():
 
 	# connect automatically if arguments given
 	var args = get_command_line_args()
-	print("args ", args)
 	if args.has("name"):
 		$Lobby.set_player_name(args.name)
 	if args.has("connect"):
