@@ -73,5 +73,4 @@ margin_bottom = 454.0
 text = "Submit"
 
 [connection signal="about_to_show" from="." to="." method="_on_CharacterPopup_about_to_show"]
-[connection signal="popup_hide" from="." to="." method="_on_CharacterPopup_popup_hide"]
 [connection signal="pressed" from="VBoxContainer/SubmitButton" to="." method="_on_SubmitButton_pressed"]
