@@ -31,11 +31,7 @@ func _on_player_spawned(params: Dictionary):
 
 
 func _on_player_died(params: Dictionary):
-	var p: Node = null
-	for child in world().get_children():
-		if int(child.name) == params.player_id:
-			p = child
-			break
+	var p = world().get_node(str(params.player_id))
 	if p == null:
 		print("no player found by id: ", params.player_id)
 		return
