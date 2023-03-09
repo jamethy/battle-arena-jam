@@ -10,6 +10,8 @@ func _ready():
 	
 	assert(bullet_scene != null, 'Bullet Scene is not provided for "%s"' % [get_path()])
 	Events.connect("player_fired_bullet", self, "_on_player_fired_bullet")
+
+	randomize()
 	
 func _on_player_spawned(params: Dictionary):
 
@@ -17,7 +19,7 @@ func _on_player_spawned(params: Dictionary):
 	var p = player_scene.instance()
 	p.set_network_master(params.net_id)
 	p.name = str(params.net_id)
-	p.position = world().get_node("SpawnPoint").position
+	p.position = get_random_spawn_point()
 	p.get_node("Camera2D").current = false
 	world().add_child(p)
 
@@ -35,7 +37,7 @@ func _on_player_died(params: Dictionary):
 	if p == null:
 		print("no player found by id: ", params.player_id)
 		return
-	p.position = world().get_node("SpawnPoint").position
+	p.position = get_random_spawn_point()
 	# move them a random direction to prevent spawning ontop of each other
 	p.move_and_slide(10*Vector2(randf(), randf()))
 	p.puppetPosition = p.position
@@ -57,3 +59,8 @@ func _on_player_fired_bullet(params: Dictionary):
 # todo figure out better way
 func world():
 	return get_parent().world
+
+func get_random_spawn_point():
+	var all_points = world().get_node("SpawnPoints")
+	var point = all_points.get_child(randi() % all_points.get_children().size())
+	return all_points.position + point.position
