@@ -81,6 +81,12 @@ remote func receive_lobby(lobby: Dictionary):
 	players = lobby
 	players[get_tree().get_network_unique_id()] = local_player
 	emit_signal("players_updated", players)
+	if game.world:
+		for p in players:
+			Events.local_emit("player_spawned", {
+				"net_id": p,
+				"data": players[p],
+			})
 
 # Signal response from SceneTree: network_peer_disconnected
 # removes player from lobby and world
@@ -96,6 +102,11 @@ remotesync func register_player(new_player_data: Dictionary):
 	new_player_data["network_id"] = caller_id
 	players[caller_id] = new_player_data
 	emit_signal("players_updated", players)
+	if game.world:
+		Events.local_emit("player_spawned", {
+			"net_id": caller_id,
+			"data": new_player_data,
+		})
 	
 remotesync func update_player_field(field, value):
 	var caller_id = get_tree().get_rpc_sender_id()

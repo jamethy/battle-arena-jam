@@ -9,20 +9,25 @@ onready var hud = $CanvasLayer/OnScreenUI
 func _ready():
 	$Lobby.game = self
 
-	# connect automatically if arguments given
 	var args = get_command_line_args()
-	if args.has("name"):
-		$Lobby.set_player_name(args.name)
-	if args.has("connect"):
-		$Lobby.connect_to_server(args.connect)
-		main_menu.hide()
-	elif args.has("host"):
-		$Lobby.create_server()
-		main_menu.hide()
+
 	if args.has("config"):
 		settings_file_name = args.config
-
 	load_settings()
+
+	if args.has("connect"):
+		$Lobby.connect_to_server(args.connect)
+		$Lobby.connect("connected", self,"_on_lobby_connected_by_args")
+	elif args.has("host"):
+		main_menu.on_start_lobby()
+		$Lobby.rpc("load_world", "Arena2")
+		main_menu.hide()
+
+func _on_lobby_connected_by_args():
+	main_menu.change_scene(main_menu.ArenaLobby)
+	$Lobby.disconnect("connected", self,"_on_lobby_connected_by_args")
+	$Lobby.load_world("Arena2")
+	main_menu.hide()
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("menu") and world:
@@ -38,9 +43,14 @@ func _input(event: InputEvent):
 static func get_command_line_args() -> Dictionary:
 	var arguments = {}
 	for argument in OS.get_cmdline_args():
-		if argument.find("=") > -1:
-			var key_value = argument.split("=")
-			arguments[key_value[0].lstrip("--")] = key_value[1]
+		if !argument.begins_with('--'):
+			continue
+		argument = argument.lstrip("--")
+		if "=" in argument:
+			var key_value = argument.split("=", false, 2)
+			arguments[key_value[0]] = key_value[1]
+		else:
+			arguments[argument] = true
 	return arguments
 
 func load_world(new_world_name):

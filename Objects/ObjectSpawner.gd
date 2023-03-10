@@ -14,6 +14,9 @@ func _ready():
 	randomize()
 	
 func _on_player_spawned(params: Dictionary):
+	if world().get_node(str(params.net_id)):
+		print("player already spawned ", params.net_id)
+		return
 
 	# create the player node, set node things, and add to world
 	var p = player_scene.instance()
