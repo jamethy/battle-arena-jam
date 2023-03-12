@@ -5,8 +5,9 @@
 [ext_resource path="res://UserInterface/HealthEmpty.png" type="Texture" id=3]
 
 [node name="HealthBar" type="HBoxContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 96.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 96, 16 )
 mouse_filter = 2
 script = ExtResource( 1 )
 health_full = ExtResource( 2 )

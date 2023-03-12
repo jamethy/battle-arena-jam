@@ -15,6 +15,7 @@ func _ready() -> void:
 	Events.connect("player_health_change", self, "_on_player_health_change")
 
 
+
 func _on_player_health_change(params: Dictionary):
 	if params.player_id != get_tree().get_network_unique_id():
 		# not for this player
@@ -54,4 +55,5 @@ func _redraw_health_bar() -> void:
 		heart.mouse_filter = MOUSE_FILTER_IGNORE
 
 		add_child(heart)
+
 

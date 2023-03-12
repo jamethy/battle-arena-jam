@@ -123,3 +123,5 @@ active = true
 parameters/playback = SubResource( 2 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Shoot/blend_position = Vector2( 0, 0 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
