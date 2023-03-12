@@ -52,6 +52,13 @@ static func get_command_line_args() -> Dictionary:
 		else:
 			arguments[argument] = true
 	return arguments
+	
+
+func clear_world():
+	remove_child(world)
+	world.queue_free()
+	hud.visible = false
+	main_menu.show()
 
 func load_world(new_world_name):
 	print("loading world: " + new_world_name)
@@ -60,21 +67,16 @@ func load_world(new_world_name):
 		print("unable to load new world")
 		return
 	
-	var old_world = world
-
-	if old_world:
-		remove_child(old_world)
-		old_world.queue_free()
+	clear_world()
 
 	world = new_world
-	hud.visible = world != null
 
 	if not world:
-		main_menu.show()
 		return
 	
 	world.name = 'world'
 	add_child(world)
+	hud.visible = true
 	main_menu.hide()
 
 

@@ -5,6 +5,8 @@ extends Node
 # Global Events Bus
 
 # all signals accept an object of arguments since gdscript does not support variadic arguments
+# net_id
+signal player_disconnected(dict)
 # net_id, data
 signal player_spawned(dict)
 # player_id, transform, max_range, speed, precision, count

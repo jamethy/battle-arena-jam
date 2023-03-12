@@ -23,10 +23,12 @@ var player_resource = preload("res://Objects/Player/Player.tscn")
 
 func _ready():
 	# signals from SceneTree about networking
-	get_tree().connect("network_peer_disconnected", self,"_on_player_disconnected")
+	get_tree().connect("network_peer_disconnected", self,"_on_network_peer_disconnected")
 	get_tree().connect("connected_to_server", self, "_on_connected_ok")
 	get_tree().connect("connection_failed", self, "_on_connected_fail")
 	get_tree().connect("server_disconnected", self, "_on_server_disconnected")
+	
+	Events.connect("player_disconnected", self, "_on_player_disconnected")
 
 # This method just connects to the server
 # It signals network_peer_connected to server and all clients (handled in _player_connected)
@@ -67,6 +69,8 @@ func create_server():
 # callback for "server_disconnected"
 func _on_server_disconnected():
 	local_player.erase("network_id")
+	game.clear_world()
+	receive_lobby({})
 
 # Called remotely by a specific client
 # only executed by the server
@@ -90,10 +94,16 @@ remote func receive_lobby(lobby: Dictionary):
 
 # Signal response from SceneTree: network_peer_disconnected
 # removes player from lobby and world
-func _on_player_disconnected(caller_id: int):
+func _on_network_peer_disconnected(caller_id: int):
 	# Called on all clients, including server, when a peer disconnects
-	if players.has(caller_id):
-		var _ignored = players.erase(caller_id)
+	Events.emit("player_disconnected", {
+		"net_id": caller_id,
+	})
+
+func _on_player_disconnected(params: Dictionary):
+	players.erase(params.net_id)
+	if game.world:
+		game.world.remove_child(game.world.get_node(str(params.net_id)))
 
 remotesync func register_player(new_player_data: Dictionary):
 	# We get id this way instead of as parameter, to prevent users from pretending to be other users
