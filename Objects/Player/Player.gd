@@ -52,6 +52,7 @@ func _physics_process(_delta: float):
 		velocity = get_action_iso_direction() * MOTION_SPEED
 		rset_unreliable("puppetPosition", position)
 		rset_unreliable("puppetVelocity", velocity)
+		$WeaponHolster.look_at(get_global_mouse_position())
 	else:
 		velocity = puppetVelocity
 		position = puppetPosition
@@ -71,6 +72,12 @@ func _process(delta):
 	if !is_network_master() && puppetVelocity.length_squared() > 0:
 		position += delta * puppetVelocity
 
+func _unhandled_input(event: InputEvent) -> void:
+	if !is_network_master():
+		return
+	if event.is_action_pressed("shoot"):
+		$WeaponHolster.shoot()
+		
 	
 static func get_action_iso_direction() -> Vector2:
 	var left := Input.get_action_strength("move_left")

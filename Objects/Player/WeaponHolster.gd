@@ -15,20 +15,26 @@ var player_weapons = {
 	"MACHING GUN":  preload("res://Objects/Weapons/MachineGun.tscn"),
 }
 
+func shoot():
+	if weapon:
+		weapon.shoot()
+
+
+func set_owner_id(owner_id: int):
+	if weapon:
+		weapon.owner_id = owner_id
+
 
 func _ready():
 	puppetTransform = transform
 	
 
 func _physics_process(_delta: float):
-		
 	if is_network_master():
-		# This function makes the node rotate towards the mouse
-		look_at(get_global_mouse_position())
 		rset_unreliable("puppetTransform", transform)
 	else:
 		transform = puppetTransform
-	
+
 
 func set_weapon_by_name(weapon_name: String):
 	weapon_name = weapon_name.to_upper()

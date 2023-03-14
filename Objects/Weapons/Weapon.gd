@@ -3,8 +3,6 @@ extends Node2D
 
 onready var animation_tree = $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
-onready var player = get_node("../../../")
-
 
 #weapon Stats
 export var weapon_name : String = "Weapon Name"
@@ -20,26 +18,25 @@ export (float, 0.25, 4.0, 0.25) var reload_time := 0.50
 
 onready var _cooldown_timer := $CoolDownTimer
 
+onready var owner_id := get_network_master()
+
 func _ready() -> void:
 	_cooldown_timer.wait_time = 1.0 / fire_rate
-	
-#func _process(_delta):
-#	var mouse_pos = player.get_local_mouse_position().normalized()
-#	animation_tree.set ('parameters/Idle/blend_position', mouse_pos)
-#	animation_tree.set ('parameters/Shoot/blend_position', mouse_pos)
-#	#print(mouse_pos)
 
 func shoot() -> void:
+	if not _cooldown_timer.is_stopped():
+		return 
 	if current_clip_size > 0:
 		animation_state.travel("Shoot")
+		_cooldown_timer.start()
 		# picked up by bullet spawner
 		Events.emit("player_fired_bullet", {
-		"player_id": get_tree().get_network_unique_id(),
-		"transform": global_transform,
-		"max_range": bullet_range,
-		"speed": bullet_speed,
-		"precision": gun_percision,
-		"count": bullet_count,
+			"player_id": owner_id,
+			"transform": global_transform,
+			"max_range": bullet_range,
+			"speed": bullet_speed,
+			"precision": gun_percision,
+			"count": bullet_count,
 		})
 		current_clip_size -= 1
 		print(current_clip_size)
