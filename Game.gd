@@ -3,8 +3,8 @@ extends Node
 var world = null
 
 var settings_file_name = "settings.json"
-onready var main_menu = $CanvasLayer/MainMenu
-onready var hud = $CanvasLayer/OnScreenUI
+@onready var main_menu = $CanvasLayer/MainMenu
+@onready var hud = $CanvasLayer/OnScreenUI
 
 func _ready():
 	$Lobby.game = self
@@ -17,15 +17,15 @@ func _ready():
 
 	if args.has("connect"):
 		$Lobby.connect_to_server(args.connect)
-		$Lobby.connect("connected", self,"_on_lobby_connected_by_args")
+		$Lobby.connect("connected",Callable(self,"_on_lobby_connected_by_args"))
 	elif args.has("host"):
 		main_menu.on_start_lobby()
 		$Lobby.rpc("load_world", "Arena2")
 		main_menu.hide()
 
 func _on_lobby_connected_by_args():
-	main_menu.change_scene(main_menu.ArenaLobby)
-	$Lobby.disconnect("connected", self,"_on_lobby_connected_by_args")
+	main_menu.change_scene_to_file(main_menu.ArenaLobby)
+	$Lobby.disconnect("connected",Callable(self,"_on_lobby_connected_by_args"))
 	$Lobby.load_world("Arena2")
 	main_menu.hide()
 
@@ -38,7 +38,7 @@ func _input(event: InputEvent):
 	else:
 		return
 	# todo
-	get_tree().set_input_as_handled()
+	get_viewport().set_input_as_handled()
 
 static func get_command_line_args() -> Dictionary:
 	var arguments = {}
@@ -62,7 +62,7 @@ func clear_world():
 
 func load_world(new_world_name):
 	print("loading world: " + new_world_name)
-	var new_world = load("res://Scenes/" + new_world_name + ".tscn").instance()
+	var new_world = load("res://Scenes/" + new_world_name + ".tscn").instantiate()
 	if not new_world:
 		print("unable to load new world")
 		return
@@ -89,7 +89,7 @@ func save_settings():
 	print("Saving settings")
 	var file = File.new()
 	file.open("user://" + settings_file_name, File.WRITE)
-	file.store_var(to_json({
+	file.store_var(JSON.new().stringify({
 		"local_player": $Lobby.local_player,
 	}))
 	file.close()
@@ -102,7 +102,9 @@ func load_settings():
 	if not file_var:
 		file.close()
 		return
-	var data = parse_json(file_var)
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(file_var)
+	var data = test_json_conv.get_data()
 	if data and "local_player" in data:
 		var player_data = data["local_player"]
 		for key in player_data:

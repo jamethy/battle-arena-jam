@@ -1,10 +1,10 @@
-tool
+@tool
 extends Button
 class_name ColorSwatch
 
-onready var color_rect : ColorRect = $ColorRect
+@onready var color_rect : ColorRect = $ColorRect
 
-export var color : = Color ('ffffff') setget set_color
+@export var color : = Color ('ffffff') : set = set_color
 
 func set_color(value:Color) -> void:
 	color = value
@@ -14,4 +14,4 @@ func set_color(value:Color) -> void:
 	
 func _ready() -> void:
 	self.color = color
-	self.connect("pressed", get_parent(), "_on_ColorSwatch_pressed", [color])
+	self.connect("pressed",Callable(get_parent(),"_on_ColorSwatch_pressed").bind(color))

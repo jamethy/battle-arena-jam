@@ -1,17 +1,17 @@
-extends KinematicBody2D
+extends CharacterBody2D
 class_name Player
 
-onready var animation_tree = $AnimationTree
-onready var animation_state = animation_tree.get("parameters/playback")
-onready var sprite = $Sprite
+@onready var animation_tree = $AnimationTree
+@onready var animation_state = animation_tree.get("parameters/playback")
+@onready var sprite = $Sprite2D
 
-onready var lobby = get_node("/root/Game/Lobby")
-onready var holster = $WeaponHolster
+@onready var lobby = get_node("/root/Game/Lobby")
+@onready var holster = $WeaponHolster
 
-export var max_health = 5 
-export var current_health = 5
+@export var max_health = 5 
+@export var current_health = 5
 
-export var MOTION_SPEED = 250 # Pixels/second.
+@export var MOTION_SPEED = 250 # Pixels/second.
 
 puppet var puppetPosition: Vector2
 puppet var puppetVelocity: Vector2
@@ -20,14 +20,14 @@ puppet var puppetVelocity: Vector2
 func _ready():
 	puppetPosition = position
 	puppetVelocity = Vector2.ZERO
-	$Camera2D.current = is_network_master()
-	Events.connect("player_hit_by_bullet", self, "_on_player_hit_by_bullet")
+	$Camera2D.current = is_multiplayer_authority()
+	Events.connect("player_hit_by_bullet",Callable(self,"_on_player_hit_by_bullet"))
 
 func _set_player_color (color: Color) -> void:
 	sprite.material.set("shader_param/new_colour",color)
 
 func _on_player_hit_by_bullet(params: Dictionary):
-	if params.player_id != get_network_master():
+	if params.player_id != get_multiplayer_authority():
 		# not for this player
 		return
 	set_health(current_health - params.damage)
@@ -45,10 +45,10 @@ func set_health(new_health: int):
 		"max_value": max_health,
 	})
 
-# from KinematicBody2D
+# from CharacterBody2D
 func _physics_process(_delta: float):
 	var velocity: Vector2
-	if is_network_master():
+	if is_multiplayer_authority():
 		velocity = get_action_iso_direction() * MOTION_SPEED
 		rset_unreliable("puppetPosition", position)
 		rset_unreliable("puppetVelocity", velocity)
@@ -58,7 +58,8 @@ func _physics_process(_delta: float):
 		position = puppetPosition
 	
 	if velocity.length_squared() > 0:
-		move_and_slide(velocity)
+		set_velocity(velocity)
+		move_and_slide()
 		animation_state.travel("Run")
 	else :
 		animation_state.travel("Idle")
@@ -69,11 +70,11 @@ func _physics_process(_delta: float):
 	animation_tree.set ('parameters/Run/blend_position', nVel)
 	
 func _process(delta):
-	if !is_network_master() && puppetVelocity.length_squared() > 0:
+	if !is_multiplayer_authority() && puppetVelocity.length_squared() > 0:
 		position += delta * puppetVelocity
 
 func _unhandled_input(event: InputEvent) -> void:
-	if !is_network_master():
+	if !is_multiplayer_authority():
 		return
 	if event.is_action_pressed("shoot"):
 		$WeaponHolster.shoot()

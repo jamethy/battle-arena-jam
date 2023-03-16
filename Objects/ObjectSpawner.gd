@@ -1,15 +1,15 @@
 extends Node
 
-export var player_scene: PackedScene
-export var bullet_scene: PackedScene
+@export var player_scene: PackedScene
+@export var bullet_scene: PackedScene
 
 func _ready():
-	assert(player_scene != null, 'Player Scene is not provided for "%s"' % [get_path()])
-	Events.connect("player_spawned", self, "_on_player_spawned")
-	Events.connect("player_died", self, "_on_player_died")
+	assert(player_scene != null) #,'Player Scene is not provided for "%s"' % [get_path()])
+	Events.connect("player_spawned",Callable(self,"_on_player_spawned"))
+	Events.connect("player_died",Callable(self,"_on_player_died"))
 	
-	assert(bullet_scene != null, 'Bullet Scene is not provided for "%s"' % [get_path()])
-	Events.connect("player_fired_bullet", self, "_on_player_fired_bullet")
+	assert(bullet_scene != null) #,'Bullet Scene is not provided for "%s"' % [get_path()])
+	Events.connect("player_fired_bullet",Callable(self,"_on_player_fired_bullet"))
 
 	randomize()
 	
@@ -19,8 +19,8 @@ func _on_player_spawned(params: Dictionary):
 		return
 
 	# create the player node, set node things, and add to world
-	var p = player_scene.instance()
-	p.set_network_master(params.net_id)
+	var p = player_scene.instantiate()
+	p.set_multiplayer_authority(params.net_id)
 	p.name = str(params.net_id)
 	p.position = get_random_spawn_point()
 	p.get_node("Camera2D").current = false
@@ -32,7 +32,9 @@ func _on_player_spawned(params: Dictionary):
 	# todo set player name
 
 	# move them a random direction to prevent spawning ontop of each other
-	p.move_and_slide(10*Vector2(randf(), randf()))
+	p.set_velocity(10*Vector2(randf(), randf()))
+	p.move_and_slide()
+	p.velocity
 
 
 func _on_player_died(params: Dictionary):
@@ -42,7 +44,9 @@ func _on_player_died(params: Dictionary):
 		return
 	p.position = get_random_spawn_point()
 	# move them a random direction to prevent spawning ontop of each other
-	p.move_and_slide(10*Vector2(randf(), randf()))
+	p.set_velocity(10*Vector2(randf(), randf()))
+	p.move_and_slide()
+	p.velocity
 	p.puppetPosition = p.position
 	p.puppetVelocity = Vector2()
 	p.set_health(p.max_health)
@@ -51,11 +55,11 @@ func _on_player_died(params: Dictionary):
 func _on_player_fired_bullet(params: Dictionary):
 	var bullet_count = params.count
 	for index in bullet_count:
-		var bullet: Bullet = bullet_scene.instance()
+		var bullet: Bullet = bullet_scene.instantiate()
 		bullet.global_transform = params.transform
 		bullet.max_range = params.max_range
 		bullet.speed = params.speed
-		bullet.rotation_percision(deg2rad(params.precision))
+		bullet.rotation_percision(deg_to_rad(params.precision))
 		bullet.owner_id = params.player_id
 		world().add_child(bullet)
 

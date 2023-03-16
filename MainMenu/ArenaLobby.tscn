@@ -1,16 +1,16 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://MainMenu/ThemeMain.tres" type="Theme" id=1]
-[ext_resource path="res://Common/fonts/Space_Font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Common/fonts/Space_Font.tres" type="FontFile" id=2]
 [ext_resource path="res://MainMenu/ArenaLobby.gd" type="Script" id=4]
 
 [node name="ArenaLobby" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -7.0
-margin_top = -12.0
-margin_right = -7.0
-margin_bottom = -12.0
+offset_left = -7.0
+offset_top = -12.0
+offset_right = -7.0
+offset_bottom = -12.0
 theme = ExtResource( 1 )
 script = ExtResource( 4 )
 
@@ -19,66 +19,66 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -320.0
-margin_top = -240.0
-margin_right = 320.0
-margin_bottom = 240.0
+offset_left = -320.0
+offset_top = -240.0
+offset_right = 320.0
+offset_bottom = 240.0
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
-margin_right = 640.0
-margin_bottom = 480.0
-custom_constants/margin_right = 25
-custom_constants/margin_top = 25
-custom_constants/margin_left = 25
-custom_constants/margin_bottom = 25
+offset_right = 640.0
+offset_bottom = 480.0
+custom_constants/offset_right = 25
+custom_constants/offset_top = 25
+custom_constants/offset_left = 25
+custom_constants/offset_bottom = 25
 
 [node name="LobbyContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
-margin_left = 25.0
-margin_top = 25.0
-margin_right = 615.0
-margin_bottom = 455.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 615.0
+offset_bottom = 455.0
 custom_constants/separation = 25
 
 [node name="Title" type="Label" parent="PanelContainer/MarginContainer/LobbyContainer"]
-margin_right = 590.0
-margin_bottom = 56.0
+offset_right = 590.0
+offset_bottom = 56.0
 custom_colors/font_color = Color( 0.388235, 0.780392, 0.301961, 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "ARENA LOBBY"
 align = 1
 
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/LobbyContainer"]
-margin_top = 81.0
-margin_right = 590.0
-margin_bottom = 89.0
+offset_top = 81.0
+offset_right = 590.0
+offset_bottom = 89.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/LobbyContainer"]
-margin_top = 114.0
-margin_right = 590.0
-margin_bottom = 142.0
+offset_top = 114.0
+offset_right = 590.0
+offset_bottom = 142.0
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelContainer/MarginContainer/LobbyContainer/HBoxContainer"]
-margin_right = 48.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 48, 0 )
+offset_right = 48.0
+offset_bottom = 28.0
+custom_minimum_size = Vector2( 48, 0 )
 
 [node name="FightersLabel" type="Label" parent="PanelContainer/MarginContainer/LobbyContainer/HBoxContainer"]
-margin_left = 73.0
-margin_right = 201.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 128, 0 )
+offset_left = 73.0
+offset_right = 201.0
+offset_bottom = 28.0
+custom_minimum_size = Vector2( 128, 0 )
 custom_colors/font_color = Color( 0.388235, 0.780392, 0.301961, 1 )
 text = "FIGHTERS"
 
 [node name="Players" type="VBoxContainer" parent="PanelContainer/MarginContainer/LobbyContainer"]
-margin_top = 167.0
-margin_right = 590.0
-margin_bottom = 167.0
+offset_top = 167.0
+offset_right = 590.0
+offset_bottom = 167.0
 
 [node name="FightButton" type="Button" parent="PanelContainer/MarginContainer/LobbyContainer"]
-margin_top = 192.0
-margin_right = 590.0
-margin_bottom = 220.0
+offset_top = 192.0
+offset_right = 590.0
+offset_bottom = 220.0
 text = "FIGHT"
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/LobbyContainer/FightButton" to="." method="_on_FightButton_pressed"]

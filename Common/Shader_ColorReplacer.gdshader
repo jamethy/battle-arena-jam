@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
-uniform vec4 select_colour : hint_color;
-uniform vec4 new_colour : hint_color;
+uniform vec4 select_colour : source_color;
+uniform vec4 new_colour : source_color;
 
 void fragment(){
     COLOR = texture(TEXTURE, UV);

@@ -1,10 +1,10 @@
 extends Area2D
 class_name WeaponHolder
 
-onready var _set_weapons_spawn_point := $WeaponSpawnPoint
-onready var lobby = get_node("/root/Game/Lobby")
+@onready var _set_weapons_spawn_point := $WeaponSpawnPoint
+@onready var lobby = get_node("/root/Game/Lobby")
 
-export var weapon_scene: PackedScene setget set_weapon
+@export var weapon_scene: PackedScene : set = set_weapon
 
 var weapon: Weapon
 puppet var puppetTransform: Transform2D
@@ -30,7 +30,7 @@ func _ready():
 	
 
 func _physics_process(_delta: float):
-	if is_network_master():
+	if is_multiplayer_authority():
 		rset_unreliable("puppetTransform", transform)
 	else:
 		transform = puppetTransform
@@ -50,17 +50,17 @@ func set_weapon(scene: PackedScene) -> void:
 		weapon.queue_free()
 		
 	if not is_inside_tree():
-		yield(self,"ready")
+		await self.ready
 	
 	for child in _set_weapons_spawn_point.get_children():
 		_set_weapons_spawn_point.remove_child(child)
 	
 	if weapon_scene:
-		var new_weapon = scene.instance()
-		assert(new_weapon is Weapon, "not a weapon")
+		var new_weapon = scene.instantiate()
+		assert(new_weapon is Weapon) #,"not a weapon")
 		
 		weapon = new_weapon
-		weapon.set_network_master(get_network_master())
+		weapon.set_multiplayer_authority(get_multiplayer_authority())
 		_set_weapons_spawn_point.add_child(weapon)
 
 

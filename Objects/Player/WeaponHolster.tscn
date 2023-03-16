@@ -11,7 +11,7 @@ position = Vector2( 0, -16 )
 script = ExtResource( 1 )
 weapon_scene = ExtResource( 2 )
 
-[node name="WeaponSpawnPoint" type="Position2D" parent="."]
+[node name="WeaponSpawnPoint" type="Marker2D" parent="."]
 position = Vector2( 12, 0 )
 __meta__ = {
 "_gizmo_extents_": 3.0

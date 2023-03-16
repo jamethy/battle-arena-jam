@@ -1,9 +1,9 @@
-extends WindowDialog
+extends Window
 
-onready var lobby = get_node("/root/Game/Lobby")
-onready var character_name := $VBoxContainer/CharacterName
-onready var character_color := $VBoxContainer/ColorSelector
-onready var character_weapon := $VBoxContainer/WeaponSelector
+@onready var lobby = get_node("/root/Game/Lobby")
+@onready var character_name := $VBoxContainer/CharacterName
+@onready var character_color := $VBoxContainer/ColorSelector
+@onready var character_weapon := $VBoxContainer/WeaponSelector
 
 var player_weapons = [ "PISTOL", "SHOTGUN", "MACHING GUN" ]
 

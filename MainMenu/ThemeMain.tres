@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=13 format=2]
 
-[ext_resource path="res://Common/fonts/Space.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Common/fonts/Space_Font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Common/fonts/Space.ttf" type="FontFile" id=1]
+[ext_resource path="res://Common/fonts/Space_Font.tres" type="FontFile" id=2]
 
 [sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.14902, 0.168627, 0.266667, 1 )
@@ -89,7 +89,7 @@ expand_margin_right = 8.0
 expand_margin_top = 24.0
 expand_margin_bottom = 9.0
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="FontFile" id=4]
 size = 32
 outline_color = Color( 0.823529, 0.913725, 0.85098, 1 )
 font_data = ExtResource( 1 )
@@ -113,8 +113,8 @@ MarginContainer/constants/margin_top = 24
 OptionButton/constants/arrow_margin = 8
 PanelContainer/styles/panel = SubResource( 3 )
 PopupMenu/styles/panel = SubResource( 7 )
-WindowDialog/colors/title_color = Color( 1, 0, 0.266667, 1 )
-WindowDialog/constants/scaleborder_size = 8
-WindowDialog/constants/title_height = 0
-WindowDialog/fonts/title_font = ExtResource( 2 )
-WindowDialog/styles/panel = SubResource( 11 )
+Window/colors/title_color = Color( 1, 0, 0.266667, 1 )
+Window/constants/scaleborder_size = 8
+Window/constants/title_height = 0
+Window/fonts/title_font = ExtResource( 2 )
+Window/styles/panel = SubResource( 11 )

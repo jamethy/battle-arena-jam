@@ -1,6 +1,6 @@
 extends Bullet
 
-onready var sprite := $Sprite
+@onready var sprite := $Sprite2D
 
 
 # Called when the node enters the scene tree for the first time.

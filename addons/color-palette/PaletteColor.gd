@@ -5,13 +5,13 @@
 
 #tool
 #class_name PaletteColor
-#extends Reference
+#extends RefCounted
 #
-#var color: Color = Color.black setget _set_color
-#var data: String = "" setget _set_data
+#var color: Color = Color.BLACK : set = _set_color
+#var data: String = "" : set = _set_data
 #var name: String = "Untitled"
 #
-#func _init(p_color: Color, p_name: String):
+#func _init(p_color: Color,p_name: String):
 #	self.color = p_color
 #	self.name = p_name
 #

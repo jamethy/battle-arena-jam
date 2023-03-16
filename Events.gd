@@ -25,7 +25,7 @@ func local_emit(signal_name: String, args: Dictionary = {}):
 	log_signal(signal_name, "local", args)
 	emit_signal(signal_name, args)
 
-remotesync func _emit_signal(signal_name: String, args: Dictionary):
+@rpc("any_peer", "call_local") func _emit_signal(signal_name: String, args: Dictionary):
 	log_signal(signal_name, "remote", args)
 	emit_signal(signal_name, args)
 

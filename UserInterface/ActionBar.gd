@@ -1,23 +1,23 @@
-tool
+@tool
 extends HBoxContainer
 
 
-export var action_full: Texture
-export var action_empty:  Texture
+@export var action_full: Texture2D
+@export var action_empty:  Texture2D
 
 # note these aren't the "source of truth", the real values are on the player
-export var max_action = 5 
-export var current_action = 5
+@export var max_action = 5 
+@export var current_action = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_redraw_action_bar()
-#	Events.connect("player_health_change", self, "_on_player_health_change")
+#	Events.connect("player_health_change",Callable(self,"_on_player_health_change"))
 #replace w/ action spent
 
 
 #func _on_player_health_change(params: Dictionary):
-#	if params.player_id != get_tree().get_network_unique_id():
+#	if params.player_id != get_tree().get_unique_id():
 #		# not for this player
 #		return
 #	max_health = params.max_value

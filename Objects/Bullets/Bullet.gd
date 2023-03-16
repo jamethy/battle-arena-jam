@@ -2,9 +2,9 @@ class_name Bullet
 extends Area2D
 
 
-export var speed := 750.0
-export var damage := 1
-export var max_range := 1000.0
+@export var speed := 750.0
+@export var damage := 1
+@export var max_range := 1000.0
 
 var owner_id: int
 var _destroyed: bool = false
@@ -37,7 +37,7 @@ func _on_TestBullet_body_entered(body):
 		return
 	if int(body.name) == owner_id:
 		return
-	if get_tree().get_network_unique_id() == 1:
+	if get_tree().get_unique_id() == 1:
 		Events.emit("player_hit_by_bullet", {
 			"player_id": int(body.name),
 			"damage": damage,
