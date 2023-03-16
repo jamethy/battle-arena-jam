@@ -13,8 +13,8 @@ class_name Player
 
 @export var MOTION_SPEED = 250 # Pixels/second.
 
-puppet var puppetPosition: Vector2
-puppet var puppetVelocity: Vector2
+var puppetPosition: Vector2
+var puppetVelocity: Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -44,14 +44,18 @@ func set_health(new_health: int):
 		"value": current_health,
 		"max_value": max_health,
 	})
+	
+@rpc
+func _set_telem(pos, vel):
+	puppetPosition = pos
+	puppetVelocity = vel
 
 # from CharacterBody2D
 func _physics_process(_delta: float):
 	var velocity: Vector2
 	if is_multiplayer_authority():
 		velocity = get_action_iso_direction() * MOTION_SPEED
-		rset_unreliable("puppetPosition", position)
-		rset_unreliable("puppetVelocity", velocity)
+		rpc("_set_telem", position, velocity)
 		$WeaponHolster.look_at(get_global_mouse_position())
 	else:
 		velocity = puppetVelocity

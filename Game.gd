@@ -87,8 +87,7 @@ func load_world(new_world_name):
 
 func save_settings():
 	print("Saving settings")
-	var file = File.new()
-	file.open("user://" + settings_file_name, File.WRITE)
+	var file = FileAccess.open("user://" + settings_file_name, FileAccess.WRITE)
 	file.store_var(JSON.new().stringify({
 		"local_player": $Lobby.local_player,
 	}))
@@ -96,12 +95,8 @@ func save_settings():
 	
 func load_settings():
 	print("Reading from settings " + settings_file_name)
-	var file = File.new()
-	file.open("user://" + settings_file_name, File.READ)
-	var file_var = file.get_var(true)
-	if not file_var:
-		file.close()
-		return
+	var file = FileAccess.open("user://" + settings_file_name, FileAccess.READ)
+	var file_var = file.get_var()
 	var test_json_conv = JSON.new()
 	test_json_conv.parse(file_var)
 	var data = test_json_conv.get_data()
