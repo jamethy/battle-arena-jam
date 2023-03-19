@@ -1,8 +1,12 @@
 class_name Weapon
 extends Node2D
 
+enum States {idle,reloading}
+
 onready var animation_tree = $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
+
+var _state: int = States.idle
 
 #weapon Stats
 export var weapon_name : String = "Weapon Name"
@@ -24,9 +28,7 @@ func _ready() -> void:
 	_cooldown_timer.wait_time = 1.0 / fire_rate
 
 func shoot() -> void:
-	if not _cooldown_timer.is_stopped():
-		return 
-	if current_clip_size > 0:
+	if current_clip_size > 0 and _state == States.idle:
 		animation_state.travel("Shoot")
 		_cooldown_timer.start()
 		# picked up by bullet spawner
@@ -40,10 +42,13 @@ func shoot() -> void:
 		})
 		current_clip_size -= 1
 		print(current_clip_size)
-	if current_clip_size <= 0:
+	if current_clip_size <= 0 and _state == States.idle:
 		reload()
+		
 
 func reload() -> void:
+	_state = States.reloading
 	yield(get_tree().create_timer(reload_time), "timeout")
 	current_clip_size = clip_size
 	print("weapon reloaded")
+	_state = States.idle
