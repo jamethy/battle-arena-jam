@@ -77,8 +77,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("shoot"):
 		$WeaponHolster.shoot()
-		
-	
+
 static func get_action_iso_direction() -> Vector2:
 	var left := Input.get_action_strength("move_left")
 	var right := Input.get_action_strength("move_right")
