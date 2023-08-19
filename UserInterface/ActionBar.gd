@@ -12,16 +12,14 @@ export var current_action = 5
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_redraw_action_bar()
-#	Events.connect("player_health_change", self, "_on_player_health_change")
-#replace w/ action spent
+	Events.connect("player_action_change", self, "_on_player_action_change")
 
-
-#func _on_player_health_change(params: Dictionary):
-#	if params.player_id != get_tree().get_network_unique_id():
-#		# not for this player
-#		return
-#	max_health = params.max_value
-#	set_health(params.value)
+func _on_player_action_change(params: Dictionary):
+	if params.player_id != get_tree().get_network_unique_id():
+		# not for this player
+		return
+	max_action = params.max_value
+	set_action(params.value)
 
 func set_action(new_action: int) -> void:	
 	# The clamp() function prevents the new_health from going below zero

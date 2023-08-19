@@ -4,12 +4,16 @@ class_name Player
 onready var animation_tree = $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
 onready var sprite = $Sprite
+onready var hurt_box = $CollisionShape2D
 
 onready var lobby = get_node("/root/Game/Lobby")
 onready var holster = $WeaponHolster
 
 export var max_health = 5 
 export var current_health = 5
+
+export var max_action = 5
+export var current_action = 5
 
 export var MOTION_SPEED = 250 # Pixels/second.
 
@@ -77,6 +81,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("shoot"):
 		$WeaponHolster.shoot()
+	if event.is_action_pressed("dodge"):
+		action_dodge()
 
 static func get_action_iso_direction() -> Vector2:
 	var left := Input.get_action_strength("move_left")
@@ -89,3 +95,32 @@ static func get_action_iso_direction() -> Vector2:
 	dir.y = down - up
 	dir.y /= 2
 	return dir.normalized()
+
+func action_dodge():
+	var action_cooldown = $ActionCooldown
+	if current_action > 0:
+		sprite.visible = false
+		hurt_box.disabled = true
+		action_cooldown.start()
+		set_action(current_action - 1)
+		print(current_action)
+	else :
+		print("no action")
+		
+func set_action(new_action: int):
+	current_action = clamp(new_action, 0, max_action)
+	Events.emit("player_action_change", {
+		"player_id": int(name),
+		"value": current_action,
+		"max_value": max_action,
+	})
+
+func _on_ActionCooldown_timeout():
+	set_action(current_action + 1)
+	print(current_action)
+	sprite.visible = true
+	hurt_box.disabled = false
+
+#func ghost_mode():
+#	sprite.visible = false
+#	hurt_box.disabled = true
