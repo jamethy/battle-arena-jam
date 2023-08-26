@@ -10,7 +10,6 @@ func _ready():
 	
 	assert(bullet_scene != null, 'Bullet Scene is not provided for "%s"' % [get_path()])
 	Events.connect("player_fired_bullet", self, "_on_player_fired_bullet")
-
 	randomize()
 	
 func _on_player_spawned(params: Dictionary):

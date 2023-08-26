@@ -1,5 +1,5 @@
 class_name Weapon
-extends Node2D
+extends Item
 
 enum States {idle,reloading}
 

@@ -600,6 +600,7 @@ tracks/2/keys = {
 
 [node name="MachineGun" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+item_name = "MACHINE GUN"
 weapon_name = "Machine Gun"
 fire_rate = 10.0
 gun_percision = 35.0

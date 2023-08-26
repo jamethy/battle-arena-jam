@@ -27,7 +27,6 @@ func set_owner_id(owner_id: int):
 
 func _ready():
 	puppetTransform = transform
-	
 
 func _physics_process(_delta: float):
 	if is_network_master():
@@ -47,8 +46,8 @@ func set_weapon_by_name(weapon_name: String):
 func set_weapon(scene: PackedScene) -> void:
 	weapon_scene = scene
 	if weapon:
-		weapon.queue_free()
-		
+#		weapon.queue_free()
+		pass
 	if not is_inside_tree():
 		yield(self,"ready")
 	
@@ -62,5 +61,4 @@ func set_weapon(scene: PackedScene) -> void:
 		weapon = new_weapon
 		weapon.set_network_master(get_network_master())
 		_set_weapons_spawn_point.add_child(weapon)
-
 

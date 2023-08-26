@@ -19,6 +19,8 @@ signal player_health_change(dict)
 signal player_died(dict)
 # player_id, value, max_value
 signal	player_action_change(dict)
+# player_id,item_name
+signal	player_item_pickup(dict)	
 
 func emit(signal_name: String, args: Dictionary = {}):
 	rpc("_emit_signal", signal_name, args)

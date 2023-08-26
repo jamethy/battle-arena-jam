@@ -26,6 +26,7 @@ func _ready():
 	puppetVelocity = Vector2.ZERO
 	$Camera2D.current = is_network_master()
 	Events.connect("player_hit_by_bullet", self, "_on_player_hit_by_bullet")
+	Events.connect("player_item_pickup",self,"item_pickup")
 
 func _set_player_color (color: Color) -> void:
 	sprite.material.set("shader_param/new_colour",color)
@@ -116,10 +117,17 @@ func set_action(new_action: int):
 	})
 
 func _on_ActionCooldown_timeout():
-	set_action(current_action + 1)
-	print(current_action)
-	sprite.visible = true
-	hurt_box.disabled = false
+	if current_action < max_action:
+		set_action(current_action + 1)
+		print(current_action)
+		sprite.visible = true
+		hurt_box.disabled = false
+	else:
+		pass
+
+func item_pickup(params: String):
+		holster.set_weapon_by_name(params)
+	
 
 #func ghost_mode():
 #	sprite.visible = false
