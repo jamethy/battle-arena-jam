@@ -125,8 +125,11 @@ func _on_ActionCooldown_timeout():
 	else:
 		pass
 
-func item_pickup(params: String):
-		holster.set_weapon_by_name(params)
+func item_pickup(params: Dictionary):
+	if params.player_id != get_network_master():
+		print("not for this player")
+		return
+	holster.set_weapon_by_name(params.item_name)
 	
 
 #func ghost_mode():
