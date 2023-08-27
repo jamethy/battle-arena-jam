@@ -1,6 +1,10 @@
 extends KinematicBody2D
 class_name Player
 
+enum States {idle,jumping,ghosting}
+
+var _state: int = States.idle
+
 onready var animation_tree = $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
 onready var sprite = $Sprite
@@ -19,6 +23,7 @@ export var MOTION_SPEED = 250 # Pixels/second.
 
 puppet var puppetPosition: Vector2
 puppet var puppetVelocity: Vector2
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -99,12 +104,10 @@ static func get_action_iso_direction() -> Vector2:
 
 func action_dodge():
 	var action_cooldown = $ActionCooldown
-	if current_action > 0:
-		sprite.visible = false
-		hurt_box.disabled = true
+	if current_action > 0 and _state == States.idle :
+		ghost_mode()
 		action_cooldown.start()
 		set_action(current_action - 1)
-		print(current_action)
 	else :
 		print("no action")
 		
@@ -117,11 +120,11 @@ func set_action(new_action: int):
 	})
 
 func _on_ActionCooldown_timeout():
+	_state = States.idle
+	modulate = Color(1,1,1,1)
+	self.set_collision_mask_bit(0,true)
 	if current_action < max_action:
 		set_action(current_action + 1)
-		print(current_action)
-		sprite.visible = true
-		hurt_box.disabled = false
 	else:
 		pass
 
@@ -132,6 +135,14 @@ func item_pickup(params: Dictionary):
 	holster.set_weapon_by_name(params.item_name)
 	
 
-#func ghost_mode():
-#	sprite.visible = false
-#	hurt_box.disabled = true
+func ghost_mode():
+	_state = States.ghosting
+	
+	if _state == States.ghosting :
+		modulate = Color(1, 1, 1, 0.5)
+		z_index = 100
+		self.set_collision_mask_bit(0,false)
+	else:
+		modulate = Color(1, 1, 1, 1)
+		z_index = 0
+	

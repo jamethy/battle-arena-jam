@@ -3,11 +3,14 @@
 [ext_resource path="res://Objects/Player/WeaponHolster.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Weapons/Shotgun.tscn" type="PackedScene" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 8.0
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 6.0
+height = 10.0
 
 [node name="WeaponHolster" type="Area2D"]
 position = Vector2( 0, -16 )
+collision_layer = 4
+collision_mask = 4
 script = ExtResource( 1 )
 weapon_scene = ExtResource( 2 )
 
@@ -17,5 +20,6 @@ __meta__ = {
 "_gizmo_extents_": 3.0
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hurtbox" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 5 )
 shape = SubResource( 1 )

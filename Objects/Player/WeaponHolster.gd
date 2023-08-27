@@ -19,14 +19,13 @@ func shoot():
 	if weapon:
 		weapon.shoot()
 
-
 func set_owner_id(owner_id: int):
 	if weapon:
 		weapon.owner_id = owner_id
 
-
 func _ready():
 	puppetTransform = transform
+	Events.connect("player_hit_by_bullet", self, "_on_player_hit_by_bullet")
 
 func _physics_process(_delta: float):
 	if is_network_master():
@@ -34,14 +33,12 @@ func _physics_process(_delta: float):
 	else:
 		transform = puppetTransform
 
-
 func set_weapon_by_name(weapon_name: String):
 	weapon_name = weapon_name.to_upper()
 	if not (weapon_name in player_weapons):
 		weapon_name = "PISTOL"
 	print("setting weapon by name: ", weapon_name)
 	set_weapon(player_weapons.get(weapon_name))
-
 
 func set_weapon(scene: PackedScene) -> void:
 	weapon_scene = scene
@@ -61,4 +58,3 @@ func set_weapon(scene: PackedScene) -> void:
 		weapon = new_weapon
 		weapon.set_network_master(get_network_master())
 		_set_weapons_spawn_point.add_child(weapon)
-

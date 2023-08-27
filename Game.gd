@@ -56,7 +56,7 @@ static func get_command_line_args() -> Dictionary:
 
 func clear_world():
 	remove_child(world)
-	world.queue_free()
+#	world.queue_free()
 	hud.visible = false
 	main_menu.show()
 

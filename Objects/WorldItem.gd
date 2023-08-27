@@ -33,12 +33,12 @@ func set_item(scene: PackedScene) -> void:
 		item.set_network_master(get_network_master())
 		_set_spawn_point.add_child(item)
 
-func interact():
+func interact(body):
 	queue_free()
 	Events.emit("player_item_pickup", {
-		"player_id": int(1), #HACKED TO ADD NOT SURE HOW TO IDENTIFY THE CORRECT PLAYER IS
+		"player_id": int(body.name), #HACKED TO ADD NOT SURE HOW TO IDENTIFY THE CORRECT PLAYER IS
 		"item_name": String(item.item_name),
 	})
 
 func _on_WorldItem_body_entered(body):
-	interact()
+	interact(body)
